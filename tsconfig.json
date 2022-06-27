@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es2018",
+        "module": "commonjs",
+        "jsx": "preserve",
+        "strict": true,
+        "esModuleInterop": true,
+        "lib": ["dom","es2018", "esnext.asynciterable"],
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "checkJs": false,
+        "outDir": "./built",
+        "strictPropertyInitialization": false,
+        // "noImplicitAny": false
+    },
+    "exclude": ["node_modules", "./built"]
+}
