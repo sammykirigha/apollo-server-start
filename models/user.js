@@ -1,6 +1,6 @@
 "use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
     const { Sequelize } = sequelize;
     class User extends Model {
         static associate(models) {}
@@ -13,13 +13,22 @@ module.exports = (sequelize, DataTypes) => {
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
             },
-            username: {
+            firstname: {
                 type: DataTypes.STRING,
                 required: true,
             },
-            name: {
+            lastname: {
                 type: DataTypes.STRING,
                 required: true,
+            },
+            email: {
+                type: DataTypes.STRING,
+                required: true,
+                unique: true
+            },
+            phone: {
+                type: DataTypes.STRING,
+                unique: true
             },
         },
         {

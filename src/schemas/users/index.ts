@@ -1,4 +1,5 @@
 import { IsNotEmpty } from "class-validator";
+import { EnumDataType } from "sequelize/types";
 import { Field, InputType, ObjectType } from "type-graphql";
 
 
@@ -8,10 +9,16 @@ export class User {
 	id: string;
 
 	@Field({ description: "Username of a user" })
-	username: string
+	firstname: string
 
 	@Field({ description: "The Name os a user" })
-	name: string;
+	lastname: string;
+
+	@Field({ description: 'Email of a user' })
+	email: string;
+
+	@Field({ description: 'phone of a user' })
+	phone: string;
 }
 
 @InputType()
@@ -22,12 +29,25 @@ export class CreateUserInput {
 		description: "Username of a user"
 	})
 	@IsNotEmpty()
-	username: string
+	firstname: string
 
 	@Field({
 		nullable: false,
 		description: "Username of a user"
 	})
 	@IsNotEmpty()
-	name: string;
+	lastname: string;
+
+	@Field({
+		nullable: false,
+		description: "email of a user"
+	})
+	@IsNotEmpty()
+	email: string;
+
+	@Field({
+		nullable: true,
+		description: "phone of a user"
+	})
+	phone: string;
 }

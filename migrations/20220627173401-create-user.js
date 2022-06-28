@@ -8,13 +8,20 @@ module.exports = {
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
             },
-            username: {
+            firstname: {
                 type: Sequelize.STRING,
                 required: true,
             },
-            name: {
+            lastname: {
                 type: Sequelize.STRING,
                 required: true,
+            },
+            email: {
+                type: Sequelize.STRING,
+                required: true,
+            },
+            phone: {
+                type: Sequelize.STRING,
             },
             createdAt: {
                 allowNull: false,
