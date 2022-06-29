@@ -1,9 +1,27 @@
 "use strict";
-import { Model } from "sequelize";
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+interface UserAttributes {
+    id: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    phone: string
+};
+
+module.exports = (sequelize: { Sequelize: any; }, DataTypes: { STRING: any; }) => {
+
     const { Sequelize } = sequelize;
-    class User extends Model {
-        static associate(models) {}
+
+    class User extends Model<UserAttributes> implements UserAttributes {
+
+        id!: string;
+        firstname!: string;
+        lastname!: string;
+        email!: string;
+        phone: string
+
+        static associate(models: any) { }
     }
     User.init(
         {
@@ -11,7 +29,7 @@ export default (sequelize, DataTypes) => {
                 primaryKey: true,
                 allowNull: false,
                 type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIDV4,
+                defaultValue: Sequelize.UUIDV4, 
             },
             firstname: {
                 type: DataTypes.STRING,
