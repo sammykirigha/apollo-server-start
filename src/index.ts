@@ -10,6 +10,7 @@ import { authChecker } from "./middlewares/auth.middleware";
 
 import { verify } from "jsonwebtoken"
 import { Context } from "./interfaces/context.interface";
+import { PatientResolver } from "./resolvers/patients/patient";
 
 
 const registerEnumTypes = (enumTypes: any) => {
@@ -28,7 +29,8 @@ async function startApolloServer() {
 
     const schema = await buildSchema({
         resolvers: [
-            UserResolver
+            UserResolver,
+            PatientResolver
         ],
         authChecker
     })
