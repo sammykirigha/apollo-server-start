@@ -1,8 +1,7 @@
 "use strict";
- //npx sequelize-cli db:migrate:undo --name 20220627173401-create-user.js
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable("users", {
+        await queryInterface.createTable("patients", {
             id: {
                 primaryKey: true,
                 allowNull: false,
@@ -24,6 +23,34 @@ module.exports = {
             phone: {
                 type: Sequelize.STRING,
             },
+            gender: {
+                type: Sequelize.STRING,
+                required: true,
+            },
+            address: {
+                type: Sequelize.STRING,
+                required: true,
+            },
+            department: {
+                type: Sequelize.STRING,
+                required: true,
+            },
+            date: {
+                type: Sequelize.DATE,
+                required: true,
+            },
+            time: {
+                type: Sequelize.TIME,
+                required: true,
+            },
+            status: {
+                type: Sequelize.STRING,
+                required: true,
+            },
+            doctor: {
+                type: Sequelize.STRING,
+                required: true,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
@@ -35,6 +62,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable("users");
+        await queryInterface.dropTable("patients");
     },
 };

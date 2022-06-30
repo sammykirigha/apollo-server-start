@@ -6,3 +6,9 @@ export interface Context {
 	res: Response,
 	user?: any
 }
+
+export interface PatientContext {
+	req: Request,
+	res: Response,
+	patient?: any
+}

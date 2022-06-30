@@ -1,27 +1,19 @@
 "use strict";
 const { Model } = require("sequelize");
 
-interface UserAttributes {
-    id: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    phone: string
-};
 
-module.exports = (sequelize: { Sequelize: any; }, DataTypes: { STRING: any; }) => {
+module.exports = (sequelize, DataTypes) => {
 
     const { Sequelize } = sequelize;
 
-    class User extends Model<UserAttributes> implements UserAttributes {
+    class User extends Model {
 
-        id!: string;
-        firstname!: string;
-        lastname!: string;
-        email!: string;
-        phone: string
 
-        static associate(models: any) { }
+        static associate(models) {
+            // User.belongsToMany(models.Project, {
+            //     through: 'ProjectAssignments'
+            // })
+         }
     }
     User.init(
         {
