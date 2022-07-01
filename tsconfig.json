@@ -11,6 +11,7 @@
         "allowJs": true,
         "checkJs": false,
         "outDir": "./built",
+        "allowSyntheticDefaultImports": true,
         "strictPropertyInitialization": false,
         // "noImplicitAny": false
     },
