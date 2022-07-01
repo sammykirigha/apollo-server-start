@@ -50,7 +50,7 @@ async function startApolloServer() {
 
                 try {
 
-                    user = verify(token, process.env.SECRET_KEY || '');
+                    user = verify(token, "sammykightgfhgcvbnb" || '');
                 } catch (error) { }
             }
 
