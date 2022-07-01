@@ -1,15 +1,14 @@
 import { Arg, Ctx, Mutation, Query } from "type-graphql";
-import { sequelize } from "../../../models";
-import { Context } from "../../interfaces/context.interface";
-
-import { CreateUserInput, User } from "../../schemas/users"
+import db from "../../../../models";
+import { Context } from "../../../common/interfaces/context.interface";
+import { CreateUserInput, User } from "../schemas";
 
 
 export class UserResolver {
 
 	@Query(returns => ([User]))
-	async getUsers(): Promise<([User])> {
-		let users = await sequelize.models.users.findAll();
+	async getUsers(): Promise<[User]> {
+		let users = await db.users.findAll();
 
 		return users;
 
@@ -28,10 +27,10 @@ export class UserResolver {
 
 
 		// Add User
-		const transaction = await sequelize.transaction();
+		const transaction = await db.sequelize.transaction();
 
 		try {
-			const user = await sequelize.models.users.create(input, {
+			const user = await db.users.create(input, {
 				transaction
 			})
 

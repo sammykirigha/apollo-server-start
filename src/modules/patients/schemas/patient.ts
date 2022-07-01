@@ -1,6 +1,6 @@
 import { IsNotEmpty, isNotEmpty } from "class-validator";
-import { EnumDataType } from "sequelize/types";
 import { Field, InputType, ObjectType } from "type-graphql";
+import { PatientStatus } from "../../../common/enums/patients.enum";
 
 @ObjectType()
 export class Patient {
@@ -39,6 +39,9 @@ export class Patient {
 
 	@Field({ description: "doctor treating the patient" })
 	doctor: string;
+
+	@Field({nullable: true, description: "doctor treating the patient" })
+	token: string;
 }
 
 @InputType()
@@ -101,15 +104,21 @@ export class CreatePatientInput {
 	})
 	time: string;
 
-	@Field({
+	@Field((type)=> PatientStatus, {
 		nullable: true,
 		description: "status of a user's appointment"
 	})
-	status: string;
+	status: PatientStatus;
 
 	@Field({
 		nullable: true,
-		description: "doctor treating the user"
+		description: "password treating the user"
 	})
 	doctor: string;
+
+	@Field({
+		nullable: true,
+		description: "password of the user"
+	})
+	password: string;
 }

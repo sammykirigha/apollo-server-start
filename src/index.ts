@@ -5,12 +5,11 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import http from 'http';
 import { buildSchema, registerEnumType } from "type-graphql";
-import { UserResolver } from "./resolvers/users";
 import { authChecker } from "./middlewares/auth.middleware";
 
 import { verify } from "jsonwebtoken"
-import { Context } from "./interfaces/context.interface";
-import { PatientResolver } from "./resolvers/patients/patient";
+import { Context } from "./common/interfaces/context.interface";
+import { PatientStatus } from "./common/enums/patients.enum";
 
 
 const registerEnumTypes = (enumTypes: any) => {
@@ -25,12 +24,13 @@ const registerEnumTypes = (enumTypes: any) => {
 async function startApolloServer() {
     dotenv.config()
 
-    registerEnumTypes([])
+    registerEnumTypes([
+        [PatientStatus, "PatientStatus", "The Status of a patient - approved, pending, complete"]
+    ])
 
     const schema = await buildSchema({
         resolvers: [
-            UserResolver,
-            PatientResolver
+            __dirname + "/modules/**/*.ts"
         ],
         authChecker
     })
