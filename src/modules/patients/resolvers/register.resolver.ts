@@ -6,7 +6,7 @@ import { CreatePatientInput, Patient } from "../schemas/patient";
 import { sign } from "jsonwebtoken";
 
 
-export class PatientResolver {
+export class RegisterResolver {
 
 	@Mutation(returns => Patient, {
 		description: "Create patient mutation"

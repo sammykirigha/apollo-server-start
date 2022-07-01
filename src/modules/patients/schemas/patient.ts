@@ -1,5 +1,5 @@
-import { IsNotEmpty, isNotEmpty } from "class-validator";
-import { Field, InputType, ObjectType } from "type-graphql";
+import { IsEmail, IsNotEmpty, isNotEmpty } from "class-validator";
+import { Field, InputType, ObjectType, Root } from "type-graphql";
 import { PatientStatus } from "../../../common/enums/patients.enum";
 
 @ObjectType()
@@ -66,6 +66,7 @@ export class CreatePatientInput {
 		description: "email of a user"
 	})
 	@IsNotEmpty()
+	@IsEmail()
 	email: string;
 
 	@Field({
@@ -122,3 +123,28 @@ export class CreatePatientInput {
 	})
 	password: string;
 }
+
+@InputType()
+export class LoginPatientInput {
+
+	@Field({
+		nullable: false,
+		description: "email of a user"
+	})
+	@IsNotEmpty()
+	@IsEmail()
+	email: string;
+
+	@Field({
+		nullable: true,
+		description: "token of the user"
+	})
+	token: string;
+
+	@Field({
+		nullable: true,
+		description: "password of the user"
+	})
+	password: string;
+}
+
