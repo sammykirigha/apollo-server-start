@@ -1,11 +1,41 @@
 "use strict";
-const { Model } = require("sequelize");
+import { Model } from "sequelize";
 
-module.exports = (sequelize, DataTypes) => {
+type PatientAttributes = {
+    id: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string,
+    phone: string,
+    gender: string,
+    address: string,
+    department: string,
+    date: Date,
+    time: string,
+    status: "pending" | "complete" | "approved",
+    doctor: string,
+}
+
+module.exports =  (sequelize: any, DataTypes: any) => {
     const { Sequelize } = sequelize;
 
-    class Patient extends Model {
-        static associate(models) {
+    class Patient extends Model<PatientAttributes> implements PatientAttributes {
+        id: string;
+        firstname: string;
+        lastname: string;
+        email: string;
+        password: string;
+        phone: string;
+        gender: string;
+        address: string;
+        department: string;
+        date: Date;
+        time: string;
+        status: "pending" | "complete" | "approved";
+        doctor: string;
+
+        static associate(models: any) {
             // define association here
         }
     }
@@ -19,62 +49,58 @@ module.exports = (sequelize, DataTypes) => {
             },
             firstname: {
                 type: DataTypes.STRING,
-                required: true,
+                allowNull: false
             },
             lastname: {
                 type: DataTypes.STRING,
-                required: true,
+                allowNull: false
             },
             email: {
                 type: DataTypes.STRING,
-                required: true,
+                allowNull: false
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             phone: {
                 type: DataTypes.STRING,
-                required: true,
+                allowNull: false
             },
             gender: {
                 type: DataTypes.STRING,
-                required: true,
+                allowNull: false
             },
             address: {
                 type: DataTypes.STRING,
-                required: true,
+                allowNull: false
             },
             department: {
                 type: DataTypes.STRING,
-                required: true,
+                allowNull: false
             },
             date: {
                 type: Sequelize.DATE,
-                required: true,
+                allowNull: false
             },
             time: {
                 type: Sequelize.TIME,
-                required: true,
+                allowNull: false
             },
             status: {
                 type: Sequelize.ENUM("pending", "complete", "approved"),
                 defaultValue: "pending",
-                required: true,
+                allowNull: false
             },
             doctor: {
                 type: DataTypes.STRING,
-                required: true,
-            },
-            createdAt: {
-                allowNull: false,
-                type: Sequelize.DATE,
-            },
-            updatedAt: {
-                allowNull: false,
-                type: Sequelize.DATE,
+                allowNull: false
             },
         },
         {
             sequelize,
             modelName: "patients",
-            modelName: "patients",
+            tableName: "patients",
             timestamps: true,
             freezeTableName: true,
         }

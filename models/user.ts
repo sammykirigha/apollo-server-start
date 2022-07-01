@@ -1,19 +1,31 @@
 "use strict";
-const { Model } = require("sequelize");
+import { Model } from "sequelize";
 
+type UserAttributes = {
+    id: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    phone: string,
+}
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize: any, DataTypes: any) => {
 
     const { Sequelize } = sequelize;
 
-    class User extends Model {
+    class User extends Model<UserAttributes> implements UserAttributes {
 
+        id: string;
+        firstname: string;
+        lastname: string;
+        email: string;
+        phone: string
 
-        static associate(models) {
+        static associate(models: any) {
             // User.belongsToMany(models.Project, {
             //     through: 'ProjectAssignments'
             // })
-         }
+        }
     }
     User.init(
         {
@@ -21,19 +33,16 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 allowNull: false,
                 type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIDV4, 
+                defaultValue: Sequelize.UUIDV4,
             },
             firstname: {
                 type: DataTypes.STRING,
-                required: true,
             },
             lastname: {
                 type: DataTypes.STRING,
-                required: true,
             },
             email: {
                 type: DataTypes.STRING,
-                required: true,
                 unique: true
             },
             phone: {

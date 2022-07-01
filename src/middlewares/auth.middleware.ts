@@ -1,5 +1,5 @@
 import { AuthChecker } from "type-graphql";
-import { Context } from "../interfaces/context.interface";
+import { Context } from "../common/interfaces/context.interface";
 
 export const authChecker: AuthChecker<Context> = ({ context: { user } }, roles) => {
 	if (roles.length === 0) return user !== null;
