@@ -15,6 +15,7 @@ type PatientAttributes = {
     time: string,
     status: "pending" | "complete" | "approved",
     doctor: string,
+    confirmed: boolean
 }
 
 module.exports =  (sequelize: any, DataTypes: any) => {
@@ -34,6 +35,7 @@ module.exports =  (sequelize: any, DataTypes: any) => {
         time: string;
         status: "pending" | "complete" | "approved";
         doctor: string;
+        confirmed: boolean
 
         static associate(models: any) {
             // define association here
@@ -90,6 +92,11 @@ module.exports =  (sequelize: any, DataTypes: any) => {
             status: {
                 type: Sequelize.ENUM("pending", "complete", "approved"),
                 defaultValue: "pending",
+                allowNull: false
+            },
+            confirmed: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
                 allowNull: false
             },
             doctor: {

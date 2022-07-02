@@ -11,6 +11,8 @@ import { verify } from "jsonwebtoken"
 import { Context } from "./common/interfaces/context.interface";
 import { PatientStatus } from "./common/enums/patients.enum";
 
+import sendMail from './utils/sendEmail'
+
 
 const registerEnumTypes = (enumTypes: any) => {
     enumTypes.forEach((enumType: any) => {
@@ -20,6 +22,9 @@ const registerEnumTypes = (enumTypes: any) => {
         })
     });
 }
+
+
+
 
 async function startApolloServer() {
     dotenv.config()
@@ -48,9 +53,11 @@ async function startApolloServer() {
             if (auth) {
                 const token = auth.split(" ")[1]
 
+                const secretKey = process.env.SECRET_KEY  || ""
+
                 try {
 
-                    user = verify(token, process.env.SECRET_KEY || '');
+                    user = verify(token, "sammykightgfhgcvbnb" || '');
                 } catch (error) { }
             }
 
@@ -75,6 +82,8 @@ async function startApolloServer() {
     console.log(
         `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
     );
+
+   
 }
 
 startApolloServer();

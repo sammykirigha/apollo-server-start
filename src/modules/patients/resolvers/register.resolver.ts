@@ -4,6 +4,8 @@ import db from "../../../../models";
 import bcryptjs from 'bcryptjs'
 import { CreatePatientInput, Patient } from "../schemas/patient";
 import { sign } from "jsonwebtoken";
+import sendMail from "../../../utils/sendEmail";
+import { email } from "../../../utils/email";
 
 
 export class RegisterResolver {
@@ -55,7 +57,20 @@ export class RegisterResolver {
 				status: patient.status,
 			}, 'sammykightgfhgcvbnb', { expiresIn: '24h' })
 
+			
 			patient.token = token;
+
+			
+			// let receiverEmail = patient.email;
+			// let url = patient.id;
+
+			// const message = email(receiverEmail, url)
+
+			// await sendMail(message)
+
+
+			console.log(patient);
+			
 			return patient;
 
 		} catch (error) {

@@ -37,6 +37,9 @@ export class Patient {
 	@Field({ description: "status of the patient's appointmnet" })
 	status: string;
 
+	@Field({ description: "confirmed email of the patient's appointmnet" })
+	confirmed: string;
+
 	@Field({ description: "doctor treating the patient" })
 	doctor: string;
 
@@ -122,6 +125,12 @@ export class CreatePatientInput {
 		description: "password of the user"
 	})
 	password: string;
+
+	@Field({
+		nullable: true,
+		description: "confirmed of the user"
+	})
+	confirmed: string;
 }
 
 @InputType()
