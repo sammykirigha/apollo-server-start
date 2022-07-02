@@ -57,20 +57,26 @@ export class RegisterResolver {
 				status: patient.status,
 			}, 'sammykightgfhgcvbnb', { expiresIn: '24h' })
 
-			
+
 			patient.token = token;
 
-			
-			// let receiverEmail = patient.email;
-			// let url = patient.id;
+			await sendMail({
+				from: {
+					name: "Doctris",
+					address: `${patient.email}`
+				},
+				to: `ebba.tromp24@ethereal.email`,
+				subject: "Confirmation Email",
+				text: "Please check your email to confirm before you continue. The email is valid for 30 min",
+				html: `<a href='http://localhost:3000/user/confirm/${patient.id}'>http://localhost:3000/user/confirm/${patient.id}</a>`
+			}
+			)
 
-			// const message = email(receiverEmail, url)
-
-			// await sendMail(message)
+			// patient.confirmed = true
 
 
 			console.log(patient);
-			
+
 			return patient;
 
 		} catch (error) {
