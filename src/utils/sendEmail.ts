@@ -7,20 +7,23 @@ function createTransporter(config: any) {
 }
 
 const defaultConfig = {
-    service: "hotmail",
+	// name: 'Ebba Tromp',
+	host: 'smtp.ethereal.email',
+	// security: 'STARTTLS',
+    port: 587,
     auth: {
-        user: "sammydorcis@outlook.com",
-        pass: "Sammy3646."
+        user: "ebba.tromp24@ethereal.email",
+        pass: "ucH2kPEy31qJpWm64t"
     }
 };
 
 
 const sendMail = async (email: any) => {
-		console.log("creating a new account........");
 		
         const transporter = createTransporter(defaultConfig);
         await transporter.verify();
         await transporter.sendMail(email);
+		console.log("creating a new account........");
     }
 
 export default sendMail;

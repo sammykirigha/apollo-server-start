@@ -12,6 +12,7 @@ import { Context } from "./common/interfaces/context.interface";
 import { PatientStatus } from "./common/enums/patients.enum";
 
 import sendMail from './utils/sendEmail'
+import { email } from "./utils/email";
 
 
 const registerEnumTypes = (enumTypes: any) => {
@@ -83,6 +84,7 @@ async function startApolloServer() {
         `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
     );
 
+    // await sendMail(email)
    
 }
 
