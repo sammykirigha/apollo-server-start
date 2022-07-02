@@ -1,4 +1,4 @@
-import { AuthChecker } from "type-graphql";
+import { AuthChecker, MiddlewareFn } from "type-graphql";
 import { Context } from "../common/interfaces/context.interface";
 
 export const authChecker: AuthChecker<Context> = ({ context: { user } }, roles) => {
@@ -9,4 +9,14 @@ export const authChecker: AuthChecker<Context> = ({ context: { user } }, roles) 
 	}
 
 	return roles.includes(user.role)
+}
+
+export const isAuth: MiddlewareFn<Context> = async ({ context: { user } }, next) => {
+	
+	if (!user) {
+		throw new Error("not authenticated")
+	}
+
+
+	return next()
 }

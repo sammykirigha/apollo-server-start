@@ -7,14 +7,18 @@ import { Context } from "../../../common/interfaces/context.interface";
 
 
 export class MeResolver {
-
 	@Query(returns => Patient, {
 		description: "get the current user"
 	})
 	async currentPatient(
-		@Ctx() ctx: Context): Promise<Patient> {
+		@Ctx() ctx: Context): Promise<Patient | null> {
 
 		let patientId = ctx.user.id
+
+		if (!patientId) {
+			return null
+		}
+
 		let patient = await db.patients.findByPk(patientId)
 
 		const newToken = sign(

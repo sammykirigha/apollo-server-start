@@ -4,7 +4,6 @@ import db from "../../../../models";
 import bcryptjs from 'bcryptjs'
 import { LoginPatientInput, Patient } from "../schemas/patient";
 import { sign } from "jsonwebtoken";
-import { PatientContext } from "../../../common/interfaces/context.interface";
 
 
 export class LoginResolver {
@@ -17,7 +16,6 @@ export class LoginResolver {
 			description: "login Patients Input"
 		})
 		input: LoginPatientInput,
-		@Ctx() ctx: PatientContext
 	): Promise<Patient | null> {
 
 		let patient = await db.patients.findOne({ where: { email: input.email } })
@@ -41,6 +39,10 @@ export class LoginResolver {
 
 		patient.token = newToken;
 		
+		// if (!patient.confirmed) {
+		// 	return null
+		// }
+
 		return patient;
 	}
 }
