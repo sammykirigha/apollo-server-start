@@ -157,3 +157,11 @@ export class LoginPatientInput {
 	password: string;
 }
 
+@InputType()
+export class DeletePatientInput {
+
+	@Field({description: "id of a user"})
+	id: string;
+	
+}
+
