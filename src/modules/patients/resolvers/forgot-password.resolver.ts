@@ -3,6 +3,7 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import db from "../../../../models";
 import crypto from 'crypto';
 import sendMail from "../../../utils/sendEmail";
+import { ForgotPasswordInput } from "../schemas/patient";
 
 
 @Resolver()
@@ -12,7 +13,7 @@ export class ForgotPasswordResolver {
 	})
 	async forgotPasssword(
 		@Arg('email')
-		email: string
+		{email}: ForgotPasswordInput
 	): Promise<string> {
 
 		let patient = await db.patients.findOne({ where: { email } })
@@ -32,7 +33,7 @@ export class ForgotPasswordResolver {
 				address: "sammydorcis@outlook.com"
 			},
 			to: `${patient.email}`,
-			subject: "Confirmation Email",
+			subject: "Password reset Email",
 			text: "Please check your email to confirm before you continue. The email is valid for 30 min",
 			html: `<p>To complete your change of sign-in method, please confirm your email address
 					by clicking this link: <a href="${resetToken}">${resetToken}</a></p>`

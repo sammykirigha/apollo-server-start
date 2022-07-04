@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, isNotEmpty } from "class-validator";
+import { isEmail, IsEmail, IsNotEmpty, isNotEmpty } from "class-validator";
 import { Field, InputType, ObjectType, Root } from "type-graphql";
 import { PatientStatus } from "../../../common/enums/patients.enum";
 
@@ -45,6 +45,15 @@ export class Patient {
 
 	@Field({nullable: true, description: "doctor treating the patient" })
 	token: string;
+
+	@Field({nullable: true, description: "doctor reset password token" })
+	passwordResetToken: string
+
+	@Field({nullable: true, description: "doctor reset password token expiration" })
+	passwordResetExpires: Date
+
+	@Field({nullable: true, description: "confirm email" })
+	confirmToken: string
 }
 
 @InputType()
@@ -163,5 +172,27 @@ export class DeletePatientInput {
 	@Field({description: "id of a user"})
 	id: string;
 	
+}
+
+@InputType()
+export class ForgotPasswordInput{
+	@Field({ description: "email of the patient" })
+	email: string;
+
+}
+
+@InputType()
+export class ConfirmEmailInput{
+	@Field({ description: "confirm user email" })
+	token: string;
+}
+
+@InputType()
+export class PasswordResetInput{
+	@Field({ description: 'token of a patient' })
+	token: string
+
+	@Field({ description: 'password of a patient' })
+	password: string
 }
 

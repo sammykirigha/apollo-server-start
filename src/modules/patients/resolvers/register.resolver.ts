@@ -45,6 +45,7 @@ export class RegisterResolver {
 			}, {
 				transaction
 			})
+			
 			if (patient) {
 				const authToken = crypto.randomBytes(32).toString("hex");
 				const hashedAuthToken = crypto
