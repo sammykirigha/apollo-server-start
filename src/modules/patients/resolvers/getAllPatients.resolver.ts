@@ -1,5 +1,4 @@
-import { UserInputError } from "apollo-server-express";
-import { FieldResolver, Query, Resolver, Root, UseMiddleware } from "type-graphql";
+import { Query , UseMiddleware } from "type-graphql";
 import db from "../../../../models";
 import { isAuth } from "../../../middlewares/auth.middleware";
 import { Patient } from "../schemas/patient";

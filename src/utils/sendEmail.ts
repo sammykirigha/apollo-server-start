@@ -8,12 +8,12 @@ function createTransporter(config: any) {
 
 const defaultConfig = {
 	// name: 'Ebba Tromp',
-	host: 'smtp.ethereal.email',
+	host: 'smtp-mail.outlook.com',
 	// security: 'STARTTLS',
     port: 587,
     auth: {
-        user: "ebba.tromp24@ethereal.email",
-        pass: "ucH2kPEy31qJpWm64t"
+        user: "sammydorcis@outlook.com",
+        pass: "Sammy3646."
     }
 };
 

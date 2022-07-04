@@ -8,7 +8,7 @@ import { sign } from "jsonwebtoken";
 
 export class DeleteResolver {
 
-	@Mutation(() => Patient, {
+	@Mutation(() => String, {
 		description: "delete patient mutation"
 	})
 	async deletePatient(
@@ -17,6 +17,12 @@ export class DeleteResolver {
 		})
 		input: DeletePatientInput,
 	): Promise<string> {
+
+		const user = await db.patients.findOne({ where: { id: input.id } })
+		
+		if (!user) {
+			throw new Error("user input error....")
+		}
 
 		await db.patients.destroy({ where: { id: input.id } })
 		

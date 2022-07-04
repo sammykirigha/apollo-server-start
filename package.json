@@ -7,7 +7,7 @@
         "start": "ts-node src/index.ts",
         "start:dev": "ts-node-dev src/index.ts",
         "migrate": "npx sequelize-cli db:migrate",
-        "unmigrate": "npx sequelize-cli db:migrate:undo",
+        "unmigrate": "npx sequelize-cli db:migrate:undo:all",
         "seed": "npx sequelize-cli db:seed:all",
         "unseed": "npx sequelize-cli db:seed:undo"
     },

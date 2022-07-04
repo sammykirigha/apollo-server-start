@@ -15,10 +15,13 @@ type PatientAttributes = {
     time: string,
     status: "pending" | "complete" | "approved",
     doctor: string,
-    confirmed: boolean
+    confirmed: boolean,
+    confirmToken: string,
+    passwordResetToken: string,
+    passwordResetExpires: Date
 }
 
-module.exports =  (sequelize: any, DataTypes: any) => {
+module.exports = (sequelize: any, DataTypes: any) => {
     const { Sequelize } = sequelize;
 
     class Patient extends Model<PatientAttributes> implements PatientAttributes {
@@ -35,7 +38,10 @@ module.exports =  (sequelize: any, DataTypes: any) => {
         time: string;
         status: "pending" | "complete" | "approved";
         doctor: string;
-        confirmed: boolean
+        confirmed: boolean;
+        confirmToken: string;
+        passwordResetToken: string
+        passwordResetExpires: Date
 
         static associate(models: any) {
             // define association here
@@ -98,6 +104,18 @@ module.exports =  (sequelize: any, DataTypes: any) => {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false,
                 allowNull: false
+            },
+            confirmToken: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            passwordResetToken: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            passwordResetExpires: {
+                type: Sequelize.DATE,
+                allowNull: true
             },
             doctor: {
                 type: DataTypes.STRING,
