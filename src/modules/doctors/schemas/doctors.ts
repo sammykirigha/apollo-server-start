@@ -211,3 +211,9 @@ export class ResetDoctorsPasswordInput{
 	@Field({ description: 'password of a patient' })
 	password: string
 }
+
+@InputType()
+export class DeleteDoctorInput {
+	@Field()
+	id: string
+}

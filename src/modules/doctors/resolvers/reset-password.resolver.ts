@@ -11,7 +11,7 @@ export class ResetDoctorsPasswordResolver {
 	@Mutation(returns => String, {
 		description: "reset doctors password"
 	})
-	async resetPassword(
+	async resetDoctorsPassword(
 		@Arg('input', type => ResetDoctorsPasswordInput, {
 			description: "Create Patients Input"
 		})
