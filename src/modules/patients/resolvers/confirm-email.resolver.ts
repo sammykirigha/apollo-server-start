@@ -37,9 +37,11 @@ export class ConfirmEmailResolver {
 			)
 		}
 
-		if (patient.confirmToken !== hashedAuthToken) {
-			throw new UserInputError("an error occured")
-		};
+		patient.confirmed = true;
+		patient.confirmToken = null;
+
+		await patient.save()
+
 
 		return "You can continue to log in with your credentials...."
 

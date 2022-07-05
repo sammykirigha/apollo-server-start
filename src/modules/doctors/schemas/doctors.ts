@@ -1,9 +1,8 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
-import { PatientStatus } from "../../../common/enums/patients.enum";
 
 @ObjectType()
-export class Patient {
+export class Doctor {
 	@Field({ description: "ID of the patient" })
 	id: string;
 
@@ -28,17 +27,6 @@ export class Patient {
 	@Field({ description: "department of the patient" })
 	department: string;
 
-	@Field({ description: "date of the patient' appointment" })
-	date: string;
-
-	@Field({ description: "time of the patient's appointmnet" })
-	time: string;
-
-	@Field({ description: "status of the patient's appointmnet" })
-	status: string;
-
-	@Field({ description: "confirmed email of the patient's appointmnet" })
-	confirmed: string;
 
 	@Field({ description: "doctor treating the patient" })
 	doctor: string;
@@ -47,8 +35,9 @@ export class Patient {
 	token: string;
 }
 
+
 @InputType()
-export class CreatePatientInput {
+export class CreateDoctorInput {
 
 	@Field({
 		nullable: false,
@@ -73,7 +62,14 @@ export class CreatePatientInput {
 	email: string;
 
 	@Field({
-		nullable: true,
+		nullable: false,
+		description: "address of a user"
+	})
+	address: string;
+
+
+	@Field({
+		nullable: false,
 		description: "phone of a user"
 	})
 	phone: string;
@@ -86,9 +82,10 @@ export class CreatePatientInput {
 
 	@Field({
 		nullable: true,
-		description: "address of a user"
+		description: "rating of a doctor"
 	})
-	address: string;
+	rating: number;
+
 
 	@Field({
 		nullable: true,
@@ -98,87 +95,48 @@ export class CreatePatientInput {
 
 	@Field({
 		nullable: true,
-		description: "date of appointment"
-	})
-	date: string;
-
-	@Field({
-		nullable: true,
-		description: "time of a user"
-	})
-	time: string;
-
-	@Field((type)=> PatientStatus, {
-		nullable: true,
-		description: "status of a user's appointment"
-	})
-	status: PatientStatus;
-
-	@Field({
-		nullable: true,
-		description: "password treating the user"
-	})
-	doctor: string;
-
-	@Field({
-		nullable: true,
 		description: "password of the user"
 	})
 	@MinLength(8)
 	password: string;
-}
-
-@InputType()
-export class LoginPatientInput {
-
-	@Field({
-		nullable: false,
-		description: "email of a user"
-	})
-	@IsNotEmpty()
-	@IsEmail()
-	email: string;
 
 	@Field({
 		nullable: true,
-		description: "token of the user"
+		description: "specialization of the user"
 	})
-	token: string;
+	specialization: string;
+
 
 	@Field({
 		nullable: true,
-		description: "password of the user"
+		description: "image of the user"
 	})
-	password: string;
+	image: string;
+
+	@Field({
+		nullable: true,
+		description: "facebooklLink of the user"
+	})
+	facebooklLink: string;
+
+
+	@Field({
+		nullable: true,
+		description: "linkedinlLink of the user"
+	})
+	linkedinlLink: string;
+
+
+	@Field({
+		nullable: true,
+		description: "instagramlLink of the user"
+	})
+	instagramlLink: string;
+
+
+	@Field({
+		nullable: true,
+		description: "twitterlLink of the user"
+	})
+	twitterlLink: string;
 }
-
-@InputType()
-export class DeletePatientInput {
-
-	@Field({description: "id of a user"})
-	id: string;
-	
-}
-
-@InputType()
-export class ForgotPasswordInput{
-	@Field({ description: "email of the patient" })
-	email: string;
-
-}
-
-@InputType()
-export class ConfirmEmailInput{
-	@Field({ description: "confirm user email" })
-	token: string;
-}
-
-@InputType()
-export class PasswordResetInput{
-	@Field({ description: 'token of a patient' })
-	token: string
-
-	@Field({ description: 'password of a patient' })
-	password: string
-}
-
