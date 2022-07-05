@@ -164,7 +164,6 @@ export class DeletePatientInput {
 export class ForgotPasswordInput{
 	@Field({ description: "email of the patient" })
 	email: string;
-
 }
 
 @InputType()
