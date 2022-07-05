@@ -140,3 +140,12 @@ export class CreateDoctorInput {
 	})
 	twitterlLink: string;
 }
+
+@InputType()
+export class CreatePasswordInput{
+	@Field({ description: 'token of a patient' })
+	token: string
+
+	@Field({ description: 'password of a patient' })
+	password: string
+}

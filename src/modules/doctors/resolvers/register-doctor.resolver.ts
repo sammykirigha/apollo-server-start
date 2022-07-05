@@ -5,47 +5,42 @@ import bcryptjs from 'bcryptjs'
 import { sign } from "jsonwebtoken";
 import sendMail from "../../../utils/sendEmail";
 import crypto from 'crypto';
+import { CreateDoctorInput, Doctor } from "../schemas/doctors";
 
 export class RegisterResolver {
-	@Mutation(returns => Patient, {
+	@Mutation(returns => Doctor, {
 		description: "Create patient mutation"
 	})
 	async createPatient(
-		@Arg('input', type => CreatePatientInput, {
+		@Arg('input', type => CreateDoctorInput, {
 			description: "Create Patients Input"
 		})
-		input: CreatePatientInput
-	): Promise<Patient> {
+		input: CreateDoctorInput
+	): Promise<Doctor> {
 
-		let user = await db.patients.findOne({ where: { email: input.email } })
-		if (user) {
+		let doctor = await db.doctors.findOne({ where: { email: input.email } })
+		if (doctor) {
 			throw new UserInputError(
-				"User with that email already exists"
+				"Doctor with that email already exists"
 			)
 		}
 
-		user = await db.patients.findOne({ where: { phone: input.phone } })
-		if (user) {
+		doctor = await db.doctors.findOne({ where: { phone: input.phone } })
+		if (doctor) {
 			throw new UserInputError(
-				"User with that phone number already exists"
+				"Doctor with that phone number already exists"
 			)
 		}
-
-		const salt = await bcryptjs.genSaltSync(10)
-		const hashedPassword = await bcryptjs.hashSync(input.password, salt);
 
 		// Add Patient
 		const transaction = await db.sequelize.transaction();
 
 		try {
-			const patient = await db.patients.create({
-				...input,
-				password: hashedPassword
-			}, {
+			const doctor = await db.patients.create({input}, {
 				transaction
 			})
 			
-			if (patient) {
+			if (doctor) {
 				const authToken = crypto.randomBytes(32).toString("hex");
 				const hashedAuthToken = crypto
 					.createHash("sha256")
@@ -59,27 +54,26 @@ export class RegisterResolver {
 						name: "Samuel Kirigha",
 						address: "sammydorcis@outlook.com"
 					},
-					to: `${patient.email}`,
+					to: `${doctor.email}`,
 					subject: "Confirmation Email",
-					text: "Please check your email to confirm before you continue. The email is valid for 30 min",
-					html: `<p>To complete your change of sign-in method, please confirm your email address
-					by clicking this link: <a href="${link}">${link}</a></p>`
+					text: "Please check your email to create your password. The email is valid for 30 min",
+					html: `<p>To complete the registration please create your password by clicking this link: <a href="${link}">${link}</a></p>`
 				}
 				)
 
 				// patient.confirmed = true
 				transaction.commit();
-				patient.confirmToken = hashedAuthToken;
-				await patient.save()
+				doctor.confirmToken = hashedAuthToken;
+				await doctor.save()
 
 				const token = sign({
-					id: patient.id,
-					status: patient.status,
+					id: doctor.id,
+					status: doctor.status,
 				}, 'sammykightgfhgcvbnb', { expiresIn: '24h' })
 
 
-				patient.token = token;
-				return patient as Patient;
+				doctor.token = token;
+				return doctor as Doctor;
 			} else {
 				throw new Error(`Could not create user`);
 			}
