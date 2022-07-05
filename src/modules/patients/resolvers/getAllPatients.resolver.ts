@@ -2,9 +2,6 @@ import { Query , UseMiddleware } from "type-graphql";
 import db from "../../../../models";
 import { isAuth } from "../../../middlewares/auth.middleware";
 import { Patient } from "../schemas/patient";
-
-
-
 export class PatientResolver {
 
 	@Query(returns => ([Patient]))
