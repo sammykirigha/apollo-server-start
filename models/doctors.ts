@@ -6,10 +6,10 @@ type DoctorAttributes = {
   firstname: string,
   lastname: string,
   email: string,
-  password: string,
   phone: string,
-  gender: string,
+  password: string,
   address: string,
+  gender: string,
   department: string,
   image: string,
   specialization: string,
@@ -31,10 +31,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
     firstname: string;
     lastname: string;
     email: string;
-    password: string;
     phone: string;
-    gender: string;
     address: string;
+    gender: string;
+    password: string;
     department: string;
     image: string;
     specialization: string;
@@ -135,8 +135,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "patients",
-      tableName: "patients",
+      modelName: "doctors",
+      tableName: "doctors",
       timestamps: true,
       freezeTableName: true,
     }
