@@ -18,21 +18,50 @@ export class Doctor {
 	@Field({ description: "phone of the patient" })
 	phone: string;
 
-	@Field({ description: "gender of the patient" })
+	@Field({nullable: true, description: "gender of the patient" })
 	gender: string;
 
 	@Field({ description: "address of the patient" })
 	address: string;
 
-	@Field({ description: "department of the patient" })
+	@Field({nullable: true, description: "department of the patient" })
 	department: string;
 
-
-	@Field({ description: "doctor treating the patient" })
-	doctor: string;
-
-	@Field({nullable: true, description: "doctor treating the patient" })
+	@Field({ nullable: true, description: "doctor treating the patient" })
 	token: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	confirmToken: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	confirmed: boolean;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	rating: number;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	specialization: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	image: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	facebooklLink: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	linkedinlLink: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	instagramlLink: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	twitterlLink: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	passwordResetToken: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	passwordResetExpires: string;
 }
 
 
@@ -142,10 +171,27 @@ export class CreateDoctorInput {
 }
 
 @InputType()
-export class CreatePasswordInput{
+export class CreatePasswordInput {
 	@Field({ description: 'token of a patient' })
 	token: string
 
 	@Field({ description: 'password of a patient' })
 	password: string
+}
+
+@InputType()
+export class LoginDoctorInput {
+	@Field({
+		nullable: false,
+		description: "email of a user"
+	})
+	@IsNotEmpty()
+	@IsEmail()
+	email: string;
+
+	@Field({
+		nullable: false,
+		description: "password of the user"
+	})
+	password: string;
 }

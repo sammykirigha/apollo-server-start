@@ -9,11 +9,11 @@ import { CreateDoctorInput, Doctor } from "../schemas/doctors";
 
 export class RegisterResolver {
 	@Mutation(returns => Doctor, {
-		description: "Create patient mutation"
+		description: "Create doctor mutation"
 	})
-	async createPatient(
+	async createDoctor(
 		@Arg('input', type => CreateDoctorInput, {
-			description: "Create Patients Input"
+			description: "Create doctors Input"
 		})
 		input: CreateDoctorInput
 	): Promise<Doctor> {
@@ -32,11 +32,11 @@ export class RegisterResolver {
 			)
 		}
 
-		// Add Patient
+		// Add doctor
 		const transaction = await db.sequelize.transaction();
 
 		try {
-			const doctor = await db.patients.create({input}, {
+			const doctor = await db.doctors.create(input, {
 				transaction
 			})
 			
@@ -61,7 +61,7 @@ export class RegisterResolver {
 				}
 				)
 
-				// patient.confirmed = true
+				// doctor.confirmed = true
 				transaction.commit();
 				doctor.confirmToken = hashedAuthToken;
 				await doctor.save()

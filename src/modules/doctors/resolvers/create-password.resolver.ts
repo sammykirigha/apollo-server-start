@@ -9,11 +9,11 @@ import { CreatePasswordInput } from "../schemas/doctors";
 @Resolver()
 export class ResetPasswordResolver {
 	@Mutation(returns => String, {
-		description: "reset patients password"
+		description: "reset doctors password"
 	})
-	async resetPassword(
+	async createPassword(
 		@Arg('input', type => CreatePasswordInput, {
-			description: "Create Patients Input"
+			description: "Create doctors Input"
 		})
 		{ token, password }: CreatePasswordInput
 	): Promise<string> {
