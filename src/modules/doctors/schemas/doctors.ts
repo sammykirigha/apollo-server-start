@@ -195,3 +195,25 @@ export class LoginDoctorInput {
 	})
 	password: string;
 }
+
+@InputType()
+export class ForgotDoctorsPasswordInput {
+	@Field({ description: "email of the doctor" })
+	email: string;
+}
+
+
+@InputType()
+export class ResetDoctorsPasswordInput{
+	@Field({ description: 'token of a patient' })
+	token: string
+
+	@Field({ description: 'password of a patient' })
+	password: string
+}
+
+@InputType()
+export class DeleteDoctorInput {
+	@Field()
+	id: string
+}

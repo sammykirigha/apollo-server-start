@@ -1,7 +1,6 @@
 import { UserInputError } from "apollo-server-express";
 import { Arg, Mutation } from "type-graphql";
 import db from "../../../../models";
-import bcryptjs from 'bcryptjs'
 import { sign } from "jsonwebtoken";
 import sendMail from "../../../utils/sendEmail";
 import crypto from 'crypto';
@@ -39,7 +38,7 @@ export class RegisterResolver {
 			const doctor = await db.doctors.create(input, {
 				transaction
 			})
-			
+
 			if (doctor) {
 				const authToken = crypto.randomBytes(32).toString("hex");
 				const hashedAuthToken = crypto
@@ -66,10 +65,13 @@ export class RegisterResolver {
 				doctor.confirmToken = hashedAuthToken;
 				await doctor.save()
 
-				const token = sign({
-					id: doctor.id,
-					status: doctor.status,
-				}, 'sammykightgfhgcvbnb', { expiresIn: '24h' })
+				const token = sign(
+					{
+						id: doctor.id,
+						status: doctor.status,
+					}, 'sammykightgfhgcvbnb',
+					{ expiresIn: '24h' }
+				)
 
 
 				doctor.token = token;

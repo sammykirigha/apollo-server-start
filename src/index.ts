@@ -9,11 +9,7 @@ import { authChecker } from "./middlewares/auth.middleware";
 
 import { verify } from "jsonwebtoken"
 import { Context } from "./common/interfaces/context.interface";
-import { PatientStatus } from "./common/enums/patients.enum";
-
-import sendMail from './utils/sendEmail'
-import { email } from "./utils/email";
-
+import { PatientStatus } from "./common/enums/appointment.enum";
 
 const registerEnumTypes = (enumTypes: any) => {
     enumTypes.forEach((enumType: any) => {

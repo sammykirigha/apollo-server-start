@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
-import { PatientStatus } from "../../../common/enums/patients.enum";
+import { PatientStatus } from "../../../common/enums/appointment.enum";
 
 @ObjectType()
 export class Patient {
@@ -164,7 +164,6 @@ export class DeletePatientInput {
 export class ForgotPasswordInput{
 	@Field({ description: "email of the patient" })
 	email: string;
-
 }
 
 @InputType()
