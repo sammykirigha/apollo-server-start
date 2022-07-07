@@ -3,50 +3,50 @@ module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable("appointments", {
             id: {
-                allowNull: false,
-                autoIncrement: true,
                 primaryKey: true,
+                allowNull: false,
+                type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
             },
             patient_id: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             patient_email: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             patient_phone: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             department: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             doctor_id: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             date: {
-              type: Sequelize.DATE,
-              allowNull: false,
+                type: Sequelize.DATE,
+                allowNull: false,
             },
             time: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             comments: {
-              type: Sequelize.STRING,
-              allowNull: true,
+                type: Sequelize.STRING,
+                allowNull: true,
             },
             status: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             fees: {
-              type: Sequelize.STRING,
-              allowNull: false,
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             createdAt: {
                 allowNull: false,

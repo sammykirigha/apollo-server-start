@@ -16,6 +16,14 @@ export class CreateAppointmentResolver {
 		input: CreateAppointmentInput
 	): Promise<Appointment> {
 
+		if (!input.patient_id) {
+			throw new Error("Please provide patient name/id")
+		}
+
+		if (!input.doctor_id) {
+			throw new Error("Please provide doctor name/id")
+		}
+
 		let doctor = await db.doctors.findOne({ where: { id: input.doctor_id } })
 
 		if (!doctor) {
@@ -37,15 +45,12 @@ export class CreateAppointmentResolver {
 						address: "sammydorcis@outlook.com"
 					},
 					to: `${appointment.patient_email}`,
-					subject: "Create Appointment",
-					text: "You have created an appointment the doctors is approving your appointment",
+					subject: "Appointment Created",
+					// text: "You have created an appointment the doctors is approving your appointment",
 					html: `
-					<ul>
-					   <li>${appointment.date}</li>
-					   <li>${appointment.time}</li>
-					   <li>${appointment.fees}</li>
-					   <li>${doctor.firstname} ${doctor.lastname}</li>
-					</ul>
+					<p>You have created a new appointment the doctors is approving your appointment</p>
+					<p>Your preferred date of appointment is ${appointment.date} at ${appointment.time}. 
+					The total charges are KSH${appointment.fees} and the Doctor to see is ${doctor.firstname} ${doctor.lastname}</p>
 					`
 				}
 				)
@@ -61,7 +66,7 @@ export class CreateAppointmentResolver {
 						name: "Samuel Kirigha",
 						address: "sammydorcis@outlook.com"
 					},
-					to: `${patient.email}`,
+					to: `${doctor.email}`,
 					subject: "New Appointment",
 					text: "Please check your new appointment to approve it.",
 					html: `

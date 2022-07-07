@@ -25,23 +25,8 @@ export class Patient {
 	@Field({ description: "address of the patient" })
 	address: string;
 
-	@Field({ description: "department of the patient" })
-	department: string;
-
-	@Field({ description: "date of the patient' appointment" })
-	date: string;
-
-	@Field({ description: "time of the patient's appointmnet" })
-	time: string;
-
-	@Field({ description: "status of the patient's appointmnet" })
-	status: string;
-
 	@Field({ description: "confirmed email of the patient's appointmnet" })
 	confirmed: string;
-
-	@Field({ description: "doctor treating the patient" })
-	doctor: string;
 
 	@Field({nullable: true, description: "doctor treating the patient" })
 	token: string;
@@ -89,36 +74,6 @@ export class CreatePatientInput {
 		description: "address of a user"
 	})
 	address: string;
-
-	@Field({
-		nullable: true,
-		description: "department of a user"
-	})
-	department: string;
-
-	@Field({
-		nullable: true,
-		description: "date of appointment"
-	})
-	date: string;
-
-	@Field({
-		nullable: true,
-		description: "time of a user"
-	})
-	time: string;
-
-	@Field((type)=> PatientStatus, {
-		nullable: true,
-		description: "status of a user's appointment"
-	})
-	status: PatientStatus;
-
-	@Field({
-		nullable: true,
-		description: "password treating the user"
-	})
-	doctor: string;
 
 	@Field({
 		nullable: true,
