@@ -11,14 +11,14 @@ type AppointmentAttributes = {
   date: Date,
   time: string,
   comments: string,
-  status: "pending" | "complete" | "approved",
-  fees: number,
+  status: "pending" | "complete" | "approved" | "rejected",
+  fees: string,
 
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
   const { Sequelize } = sequelize;
-  class Appointments extends Model {
+  class Appointment extends Model {
 
     id: string;
     patient_id: string;
@@ -29,14 +29,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
     date: Date;
     time: string;
     comments: string;
-    status: "pending" | "complete" | "approved";
-    fees: number;
+    status: "pending" | "complete" | "approved" | "rejected";
+    fees: string;
 
     static associate(models: any) {
       // define association here
     }
   }
-  Appointments.init(
+  Appointment.init(
     {
       id: {
         primaryKey: true,
@@ -82,7 +82,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false
       },
       fees: {
-        type: Sequelize.INTEGER,
+        type:  DataTypes.STRING,
         allowNull: false
       },
     },
@@ -91,5 +91,5 @@ module.exports = (sequelize: any, DataTypes: any) => {
       sequelize,
       modelName: 'appointments',
     });
-  return Appointments;
+  return Appointment;
 };

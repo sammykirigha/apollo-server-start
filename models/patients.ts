@@ -10,11 +10,6 @@ type PatientAttributes = {
     phone: string,
     gender: string,
     address: string,
-    department: string,
-    date: Date,
-    time: string,
-    status: "pending" | "complete" | "approved",
-    doctor: string,
     confirmed: boolean,
     confirmToken: string,
     passwordResetToken: string,
@@ -33,11 +28,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
         phone: string;
         gender: string;
         address: string;
-        department: string;
-        date: Date;
-        time: string;
-        status: "pending" | "complete" | "approved";
-        doctor: string;
         confirmed: boolean;
         confirmToken: string;
         passwordResetToken: string
@@ -83,23 +73,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            department: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            date: {
-                type: Sequelize.DATE,
-                allowNull: false
-            },
-            time: {
-                type: Sequelize.TIME,
-                allowNull: false
-            },
-            status: {
-                type: Sequelize.ENUM("pending", "complete", "approved"),
-                defaultValue: "pending",
-                allowNull: false
-            },
             confirmed: {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false,
@@ -116,10 +89,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
             passwordResetExpires: {
                 type: Sequelize.DATE,
                 allowNull: true
-            },
-            doctor: {
-                type: DataTypes.STRING,
-                allowNull: false
             },
         },
         {

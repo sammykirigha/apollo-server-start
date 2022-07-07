@@ -35,18 +35,12 @@ export class Appointment {
 	@Field({ description: "charge for the appointment" })
 	fees: string;
 
-	@Field({description: "status of the appointment" })
+	@Field({ description: "status of the appointment" })
 	status: string;
-
 }
 
 @InputType()
-export class CreateAppointmentInput{
-	@Field({
-		nullable: false,
-		description: "address of a user"
-	})
-	id: string;
+export class CreateAppointmentInput {
 
 	@Field({
 		nullable: false,
@@ -73,7 +67,7 @@ export class CreateAppointmentInput{
 		nullable: false,
 		description: "address of a user"
 	})
-	fees: number;
+	fees: string;
 
 	@Field({
 		nullable: false,
@@ -82,24 +76,28 @@ export class CreateAppointmentInput{
 	department: string;
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "date of appointment"
 	})
-	date: Date;
+	date: string;
 
-	@Field({
-		nullable: true,
-		description: "time of a user"
-	})
+	@Field(
+		{
+			nullable: true,
+			description: "time of a user"
+		}
+	)
 	time: string;
 
-	@Field({
-		nullable: true,
-		description: "time of a user"
-	})
+	@Field(
+		{
+			nullable: true,
+			description: "time of a user"
+		}
+	)
 	comments: string;
 
-	@Field((type)=> AppointmentStatus, {
+	@Field((type) => AppointmentStatus, {
 		nullable: true,
 		description: "status of a user's appointment"
 	})

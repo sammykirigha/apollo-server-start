@@ -31,26 +31,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 required: true,
             },
-            department: {
-                type: Sequelize.STRING,
-                required: true,
-            },
-            date: {
-                type: Sequelize.DATE,
-                required: true,
-            },
-            time: {
-                type: Sequelize.TIME,
-                required: true,
-            },
-            status: {
-                type: Sequelize.STRING,
-                required: true,
-            },
-            doctor: {
-                type: Sequelize.STRING,
-                required: true,
-            },
+           
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
