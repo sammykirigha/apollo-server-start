@@ -180,3 +180,13 @@ export class UpdateAppointmentInput {
 	})
 	doctor_id: string;
 }
+
+@InputType()
+export class HandleSingleAppointmentInput {
+
+	@Field({
+		nullable: false,
+		description: "phone of a user"
+	})
+	id: string;
+}
