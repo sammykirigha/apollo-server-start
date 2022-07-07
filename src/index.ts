@@ -9,7 +9,7 @@ import { authChecker } from "./middlewares/auth.middleware";
 
 import { verify } from "jsonwebtoken"
 import { Context } from "./common/interfaces/context.interface";
-import { PatientStatus } from "./common/enums/appointment.enum";
+import { AppointmentStatus, PatientStatus } from "./common/enums/appointment.enum";
 
 const registerEnumTypes = (enumTypes: any) => {
     enumTypes.forEach((enumType: any) => {
@@ -21,13 +21,12 @@ const registerEnumTypes = (enumTypes: any) => {
 }
 
 
-
-
 async function startApolloServer() {
     dotenv.config()
 
     registerEnumTypes([
-        [PatientStatus, "PatientStatus", "The Status of a patient - approved, pending, complete"]
+        [PatientStatus, "PatientStatus", "The Status of a patient - approved, pending, complete"],
+        [AppointmentStatus, "AppointmentStatus", "The Status of a appointment"],
     ])
 
     const schema = await buildSchema({

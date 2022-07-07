@@ -12,7 +12,7 @@ type AppointmentAttributes = {
   time: string,
   comments: string,
   status: "pending" | "complete" | "approved",
-  fees: number,
+  fees: string,
 
 }
 
@@ -30,7 +30,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     time: string;
     comments: string;
     status: "pending" | "complete" | "approved";
-    fees: number;
+    fees: string;
 
     static associate(models: any) {
       // define association here
@@ -82,7 +82,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false
       },
       fees: {
-        type: Sequelize.INTEGER,
+        type:  DataTypes.STRING,
         allowNull: false
       },
     },

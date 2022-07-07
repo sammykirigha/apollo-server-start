@@ -16,12 +16,6 @@ export class CreateAppointmentResolver {
 		input: CreateAppointmentInput
 	): Promise<Appointment> {
 
-		let appointment = db.appointments.findOne({ where: { id: input.id } })
-
-		if (appointment) {
-			throw new UserInputError("That appointment already exists")
-		}
-
 		let doctor = await db.doctors.findOne({ where: { id: input.doctor_id } })
 
 		if (!doctor) {

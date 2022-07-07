@@ -6,7 +6,7 @@ module.exports = {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER,
+                defaultValue: Sequelize.UUIDV4,
             },
             patient_id: {
               type: Sequelize.STRING,
@@ -45,7 +45,7 @@ module.exports = {
               allowNull: false,
             },
             fees: {
-              type: Sequelize.INTEGER,
+              type: Sequelize.STRING,
               allowNull: false,
             },
             createdAt: {
