@@ -109,3 +109,74 @@ export class CreateAppointmentInput {
 	})
 	doctor_id: string;
 }
+
+@InputType()
+export class UpdateAppointmentInput {
+
+	@Field({
+		nullable: false,
+		description: "phone of a user"
+	})
+	id: string;
+
+	@Field({
+		nullable: false,
+		description: "Username of a user"
+	})
+	@IsNotEmpty()
+	patient_id: string;
+
+	@Field({
+		nullable: false,
+		description: "email of a user"
+	})
+	@IsNotEmpty()
+	@IsEmail()
+	patient_email: string;
+
+	@Field({
+		nullable: false,
+		description: "phone of a user"
+	})
+	patient_phone: string;
+
+	@Field({
+		nullable: false,
+		description: "address of a user"
+	})
+	fees: string;
+
+	@Field({
+		nullable: false,
+		description: "department of a user"
+	})
+	department: string;
+
+	@Field({
+		nullable: true,
+		description: "date of appointment"
+	})
+	date: string;
+
+	@Field(
+		{
+			nullable: true,
+			description: "time of a user"
+		}
+	)
+	time: string;
+
+	@Field(
+		{
+			nullable: true,
+			description: "time of a user"
+		}
+	)
+	comments: string;
+
+	@Field({
+		nullable: true,
+		description: "password treating the user"
+	})
+	doctor_id: string;
+}
