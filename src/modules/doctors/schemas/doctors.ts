@@ -217,3 +217,112 @@ export class DeleteDoctorInput {
 	@Field()
 	id: string
 }
+
+
+@InputType()
+export class UpdateDoctorInput {
+	@Field({
+		nullable: false,
+		description: "Username of a user"
+	})
+	id: string
+
+	@Field({
+		nullable: false,
+		description: "Username of a user"
+	})
+	firstname: string
+
+	@Field({
+		nullable: false,
+		description: "Username of a user"
+	})
+	lastname: string;
+
+	@Field({
+		nullable: false,
+		description: "email of a user"
+	})
+	@IsEmail()
+	email: string;
+
+	@Field({
+		nullable: false,
+		description: "address of a user"
+	})
+	address: string;
+
+
+	@Field({
+		nullable: false,
+		description: "phone of a user"
+	})
+	phone: string;
+
+	@Field({
+		nullable: true,
+		description: "gender of a user"
+	})
+	gender: string;
+
+	@Field({
+		nullable: true,
+		description: "rating of a doctor"
+	})
+	rating: number;
+
+
+	@Field({
+		nullable: true,
+		description: "department of a user"
+	})
+	department: string;
+
+	@Field({
+		nullable: true,
+		description: "password of the user"
+	})
+	@MinLength(8)
+	password: string;
+
+	@Field({
+		nullable: true,
+		description: "specialization of the user"
+	})
+	specialization: string;
+
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	image: string;
+
+	@Field({
+		nullable: true,
+		description: "facebooklLink of the user"
+	})
+	facebooklLink: string;
+
+
+	@Field({
+		nullable: true,
+		description: "linkedinlLink of the user"
+	})
+	linkedinlLink: string;
+
+
+	@Field({
+		nullable: true,
+		description: "instagramlLink of the user"
+	})
+	instagramlLink: string;
+
+
+	@Field({
+		nullable: true,
+		description: "twitterlLink of the user"
+	})
+	twitterlLink: string;
+}
+

@@ -28,8 +28,14 @@ export class Patient {
 	@Field({ description: "confirmed email of the patient's appointmnet" })
 	confirmed: string;
 
-	@Field({nullable: true, description: "doctor treating the patient" })
+	@Field({ nullable: true, description: "doctor treating the patient" })
 	token: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	image: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	description: string;
 }
 
 @InputType()
@@ -81,6 +87,18 @@ export class CreatePatientInput {
 	})
 	@MinLength(8)
 	password: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	iamge: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	description: string;
 }
 
 @InputType()
@@ -110,29 +128,99 @@ export class LoginPatientInput {
 @InputType()
 export class DeletePatientInput {
 
-	@Field({description: "id of a user"})
+	@Field({ description: "id of a user" })
 	id: string;
-	
+
 }
 
 @InputType()
-export class ForgotPasswordInput{
+export class ForgotPasswordInput {
 	@Field({ description: "email of the patient" })
 	email: string;
 }
 
 @InputType()
-export class ConfirmEmailInput{
+export class ConfirmEmailInput {
 	@Field({ description: "confirm user email" })
 	token: string;
 }
 
 @InputType()
-export class PasswordResetInput{
+export class PasswordResetInput {
 	@Field({ description: 'token of a patient' })
 	token: string
 
 	@Field({ description: 'password of a patient' })
 	password: string
 }
+
+
+
+@InputType()
+export class UpdatePatientInput {
+
+	@Field({
+		nullable: false,
+		description: "Username of a user"
+	})
+	@IsNotEmpty()
+	id: string
+
+	@Field({
+		nullable: false,
+		description: "Username of a user"
+	})
+	firstname: string
+
+	@Field({
+		nullable: false,
+		description: "Username of a user"
+	})
+	lastname: string;
+
+	@Field({
+		nullable: false,
+		description: "email of a user"
+	})
+	@IsEmail()
+	email: string;
+
+	@Field({
+		nullable: true,
+		description: "phone of a user"
+	})
+	phone: string;
+
+	@Field({
+		nullable: true,
+		description: "gender of a user"
+	})
+	gender: string;
+
+	@Field({
+		nullable: true,
+		description: "address of a user"
+	})
+	address: string;
+
+	@Field({
+		nullable: true,
+		description: "password of the user"
+	})
+	@MinLength(8)
+	password: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	image: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	description: string;
+}
+
 

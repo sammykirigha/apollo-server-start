@@ -10,6 +10,8 @@ type PatientAttributes = {
     phone: string,
     gender: string,
     address: string,
+    image: string;
+    description: string;
     confirmed: boolean,
     confirmToken: string,
     passwordResetToken: string,
@@ -28,6 +30,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
         phone: string;
         gender: string;
         address: string;
+        image: string;
+         description: string;
         confirmed: boolean;
         confirmToken: string;
         passwordResetToken: string
@@ -70,6 +74,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 allowNull: false
             },
             address: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+
+             image: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+             
+              description: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
