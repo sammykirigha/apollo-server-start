@@ -16,15 +16,15 @@ export class CreateAppointmentResolver {
 		input: CreateAppointmentInput
 	): Promise<Appointment> {
 
-		if (!input.patient_id) {
+		if (!input.patientId) {
 			throw new Error("Please provide patient name/id")
 		}
 
-		if (!input.doctor_id) {
+		if (!input.doctorId) {
 			throw new Error("Please provide doctor name/id")
 		}
 
-		let doctor = await db.doctors.findOne({ where: { id: input.doctor_id } })
+		let doctor = await db.doctors.findOne({ where: { id: input.doctorId } })
 
 		if (!doctor) {
 			throw new Error("Not doctor found...")
@@ -55,7 +55,7 @@ export class CreateAppointmentResolver {
 				}
 				)
 
-				let patient = await db.patients.findOne({ where: { id: input.patient_id } })
+				let patient = await db.patients.findOne({ where: { id: input.patientId } })
 
 				if (!patient) {
 					throw new Error("Not found the patient")
