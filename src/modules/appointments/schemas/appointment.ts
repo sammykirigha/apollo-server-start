@@ -9,7 +9,7 @@ export class Appointment {
 	id: string;
 
 	@Field({ description: "name of the patient" })
-	patient_id: string;
+	patientId: string;
 
 	@Field({ description: "email of the patient" })
 	patient_email: string;
@@ -21,7 +21,7 @@ export class Appointment {
 	department: string;
 
 	@Field({ description: "doctors name" })
-	doctor_id: string;
+	doctorId: string;
 
 	@Field({ description: "date of the appointment" })
 	date: Date;
@@ -47,7 +47,7 @@ export class CreateAppointmentInput {
 		description: "Username of a user"
 	})
 	@IsNotEmpty()
-	patient_id: string;
+	patientId: string;
 
 	@Field({
 		nullable: false,
@@ -97,6 +97,12 @@ export class CreateAppointmentInput {
 	)
 	comments: string;
 
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	description: string;
+
 	@Field((type) => AppointmentStatus, {
 		nullable: true,
 		description: "status of a user's appointment"
@@ -107,7 +113,7 @@ export class CreateAppointmentInput {
 		nullable: true,
 		description: "password treating the user"
 	})
-	doctor_id: string;
+	doctorId: string;
 }
 
 @InputType()

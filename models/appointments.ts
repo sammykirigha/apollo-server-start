@@ -3,14 +3,15 @@ import { Model } from "sequelize";
 
 type AppointmentAttributes = {
   id: string,
-  patient_id: string,
+  patientId: string,
   patient_email: string,
   patient_phone: string,
   department: string,
-  doctor_id: string,
+  doctorId: string,
   date: Date,
   time: string,
   comments: string,
+  description: string,
   status: "pending" | "complete" | "approved" | "rejected",
   fees: string,
 
@@ -21,19 +22,21 @@ module.exports = (sequelize: any, DataTypes: any) => {
   class Appointment extends Model {
 
     id: string;
-    patient_id: string;
+    patientId: string;
     patient_email: string;
     patient_phone: string;
     department: string;
-    doctor_id: string;
+    doctorId: string;
     date: Date;
     time: string;
     comments: string;
+    description: string;
     status: "pending" | "complete" | "approved" | "rejected";
     fees: string;
 
     static associate(models: any) {
       // define association here
+      Appointment.belongsTo(models.patients)
     }
   }
   Appointment.init(
@@ -44,8 +47,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      patient_id: {
-        type: DataTypes.STRING,
+      patientId: {
+        type: Sequelize.UUID,
         allowNull: false
       },
       patient_email: {
@@ -60,8 +63,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      doctor_id: {
-        type: DataTypes.STRING,
+      doctorId: {
+        type: Sequelize.UUID,
         allowNull: false
       },
       date: {
@@ -73,6 +76,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false
       },
       comments: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+        description: {
         type: DataTypes.STRING,
         allowNull: false
       },

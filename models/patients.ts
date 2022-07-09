@@ -11,7 +11,6 @@ type PatientAttributes = {
     gender: string,
     address: string,
     image: string;
-    description: string;
     confirmed: boolean,
     confirmToken: string,
     passwordResetToken: string,
@@ -31,7 +30,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
         gender: string;
         address: string;
         image: string;
-         description: string;
         confirmed: boolean;
         confirmToken: string;
         passwordResetToken: string
@@ -39,6 +37,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
         static associate(models: any) {
             // define association here
+            Patient.hasMany(models.appointments, {
+                foreignKey: {
+                    allowNull: false,
+                    name: "patientId"
+                }
+            });
         }
     }
     Patient.init(
@@ -77,15 +81,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-
              image: {
                 type: DataTypes.STRING,
-                allowNull: false
-            },
-             
-              description: {
-                type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             confirmed: {
                 type: Sequelize.BOOLEAN,

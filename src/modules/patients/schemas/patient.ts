@@ -4,6 +4,9 @@ import { PatientStatus } from "../../../common/enums/appointment.enum";
 
 @ObjectType()
 export class Patient {
+	static findAll(arg0: { include: { model: typeof import("../../appointments/schemas/appointment").Appointment; required: boolean; }[]; }) {
+		throw new Error("Method not implemented.");
+	}
 	@Field({ description: "ID of the patient" })
 	id: string;
 
@@ -33,9 +36,6 @@ export class Patient {
 
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	image: string;
-
-	@Field({ nullable: true, description: "doctor treating the patient" })
-	description: string;
 }
 
 @InputType()
@@ -92,13 +92,9 @@ export class CreatePatientInput {
 		nullable: true,
 		description: "image of the user"
 	})
-	iamge: string;
+	image: string;
 
-	@Field({
-		nullable: true,
-		description: "image of the user"
-	})
-	description: string;
+	
 }
 
 @InputType()

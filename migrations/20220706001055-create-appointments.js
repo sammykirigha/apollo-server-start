@@ -8,8 +8,8 @@ module.exports = {
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
             },
-            patient_id: {
-                type: Sequelize.STRING,
+            patientId: {
+                type: Sequelize.UUID,
                 allowNull: false,
             },
             patient_email: {
@@ -24,8 +24,8 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            doctor_id: {
-                type: Sequelize.STRING,
+            doctorId: {
+                 type: Sequelize.UUID,
                 allowNull: false,
             },
             date: {
