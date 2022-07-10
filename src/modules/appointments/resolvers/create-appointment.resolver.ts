@@ -39,21 +39,21 @@ export class CreateAppointmentResolver {
 
 			if (appointment) {
 
-				await sendMail({
-					from: {
-						name: "Samuel Kirigha",
-						address: "sammydorcis@outlook.com"
-					},
-					to: `${appointment.patient_email}`,
-					subject: "Appointment Created",
-					// text: "You have created an appointment the doctors is approving your appointment",
-					html: `
-					<p>You have created a new appointment the doctors is approving your appointment</p>
-					<p>Your preferred date of appointment is ${appointment.date} at ${appointment.time}. 
-					The total charges are KSH${appointment.fees} and the Doctor to see is ${doctor.firstname} ${doctor.lastname}</p>
-					`
-				}
-				)
+				// await sendMail({
+				// 	from: {
+				// 		name: "Samuel Kirigha",
+				// 		address: "sammydorcis@outlook.com"
+				// 	},
+				// 	to: `${appointment.patient_email}`,
+				// 	subject: "Appointment Created",
+				// 	// text: "You have created an appointment the doctors is approving your appointment",
+				// 	html: `
+				// 	<p>You have created a new appointment the doctors is approving your appointment</p>
+				// 	<p>Your preferred date of appointment is ${appointment.date} at ${appointment.time}. 
+				// 	The total charges are KSH${appointment.fees} and the Doctor to see is ${doctor.firstname} ${doctor.lastname}</p>
+				// 	`
+				// }
+				// )
 
 				let patient = await db.patients.findOne({ where: { id: input.patientId } })
 
@@ -61,23 +61,23 @@ export class CreateAppointmentResolver {
 					throw new Error("Not found the patient")
 				}
 
-				await sendMail({
-					from: {
-						name: "Samuel Kirigha",
-						address: "sammydorcis@outlook.com"
-					},
-					to: `${doctor.email}`,
-					subject: "New Appointment",
-					text: "Please check your new appointment to approve it.",
-					html: `
-					<p>
-						You have a new appointment from 
-						${patient.firstname} ${patient.lastname} on ${appointment.date} at ${appointment.time}. 
-						Please check your schedule to approve or disapprove the appointment
-					</p>
-					`
-				}
-				)
+				// await sendMail({
+				// 	from: {
+				// 		name: "Samuel Kirigha",
+				// 		address: "sammydorcis@outlook.com"
+				// 	},
+				// 	to: `${doctor.email}`,
+				// 	subject: "New Appointment",
+				// 	text: "Please check your new appointment to approve it.",
+				// 	html: `
+				// 	<p>
+				// 		You have a new appointment from 
+				// 		${patient.firstname} ${patient.lastname} on ${appointment.date} at ${appointment.time}. 
+				// 		Please check your schedule to approve or disapprove the appointment
+				// 	</p>
+				// 	`
+				// }
+				// )
 
 				transaction.commit()
 
