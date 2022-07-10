@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
 import { PatientStatus } from "../../../common/enums/appointment.enum";
+import { Appointment } from "../../appointments/schemas/appointment";
 
 @ObjectType()
 export class Patient {
@@ -36,6 +37,12 @@ export class Patient {
 
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	image: string;
+
+	@Field((_returns) => [Appointment],{
+		nullable: true,
+		description: "appointments of the patients"
+	})
+	appointments!: [Appointment]
 
 }
 
@@ -95,6 +102,7 @@ export class CreatePatientInput {
 	})
 	image: string;
 
+	
 	
 }
 

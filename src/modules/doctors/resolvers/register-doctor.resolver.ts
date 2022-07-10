@@ -48,17 +48,17 @@ export class RegisterResolver {
 
 				const link = `https://promis.co.ke/logins/email/confirm/${authToken}`
 
-				await sendMail({
-					from: {
-						name: "Samuel Kirigha",
-						address: "sammydorcis@outlook.com"
-					},
-					to: `${doctor.email}`,
-					subject: "Confirmation Email",
-					text: "Please check your email to create your password. The email is valid for 30 min",
-					html: `<p>To complete the registration please create your password by clicking this link: <a href="${link}">${link}</a></p>`
-				}
-				)
+				// await sendMail({
+				// 	from: {
+				// 		name: "Samuel Kirigha",
+				// 		address: "sammydorcis@outlook.com"
+				// 	},
+				// 	to: `${doctor.email}`,
+				// 	subject: "Confirmation Email",
+				// 	text: "Please check your email to create your password. The email is valid for 30 min",
+				// 	html: `<p>To complete the registration please create your password by clicking this link: <a href="${link}">${link}</a></p>`
+				// }
+				// )
 
 				// doctor.confirmed = true
 				transaction.commit();

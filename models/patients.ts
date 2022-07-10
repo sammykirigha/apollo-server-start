@@ -32,16 +32,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
         image: string;
         confirmed: boolean;
         confirmToken: string;
-        passwordResetToken: string
-        passwordResetExpires: Date
+        passwordResetToken: string;
+        passwordResetExpires: Date;
 
         static associate(models: any) {
             // define association here
             Patient.hasMany(models.appointments, {
-                foreignKey: {
-                    allowNull: false,
-                    name: "patientId"
-                }
+                foreignKey: "patientId"
             });
         }
     }
