@@ -10,6 +10,7 @@ module.exports = {
             },
             patientId: {
                 type: Sequelize.UUID,
+                references: {model: 'patients', key: 'id'},
                 allowNull: false,
             },
             patient_email: {

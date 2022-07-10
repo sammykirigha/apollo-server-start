@@ -5,8 +5,10 @@ export class PatientResolver {
 	@Query(returns => ([Patient]))
 	async getPatients(): Promise<([Patient])> {
 		let patients = await db.patients.findAll({
-			include: { model: db.appointments, required: true }
+			include: db.appointments
 		})
+
+		// let appointment = await db.appointments.findOne({where: {patientId: ""}})
 
 		return patients
 	}

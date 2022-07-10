@@ -36,6 +36,7 @@ export class Patient {
 
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	image: string;
+
 }
 
 @InputType()
@@ -217,6 +218,17 @@ export class UpdatePatientInput {
 		description: "image of the user"
 	})
 	description: string;
+}
+
+
+@InputType()
+export class HandleSinglePatientInput {
+
+	@Field({
+		nullable: false,
+		description: "phone of a user"
+	})
+	id: string;
 }
 
 
