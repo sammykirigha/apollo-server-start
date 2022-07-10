@@ -43,9 +43,16 @@ export class RegisterResolver {
 				...input,
 				password: hashedPassword
 			}, {
-				transaction
-			})
-			
+				include: [
+					{
+						model: db.appointments,
+					}
+				],
+			},
+				{
+					transaction
+				})
+
 			if (patient) {
 				const authToken = crypto.randomBytes(32).toString("hex");
 				const hashedAuthToken = crypto
@@ -55,18 +62,18 @@ export class RegisterResolver {
 
 				const link = `https://promis.co.ke/logins/email/confirm/${authToken}`
 
-				await sendMail({
-					from: {
-						name: "Samuel Kirigha",
-						address: "sammydorcis@outlook.com"
-					},
-					to: `${patient.email}`,
-					subject: "Confirmation Email",
-					text: "Please check your email to confirm before you continue. The email is valid for 30 min",
-					html: `<p>To complete your change of sign-in method, please confirm your email address
-					by clicking this link: <a href="${link}">${link}</a></p>`
-				}
-				)
+				// await sendMail({
+				// 	from: {
+				// 		name: "Samuel Kirigha",
+				// 		address: "sammydorcis@outlook.com"
+				// 	},
+				// 	to: `${patient.email}`,
+				// 	subject: "Confirmation Email",
+				// 	text: "Please check your email to confirm before you continue. The email is valid for 30 min",
+				// 	html: `<p>To complete your change of sign-in method, please confirm your email address
+				// 	by clicking this link: <a href="${link}">${link}</a></p>`
+				// }
+				// )
 
 				// patient.confirmed = true
 				transaction.commit();
