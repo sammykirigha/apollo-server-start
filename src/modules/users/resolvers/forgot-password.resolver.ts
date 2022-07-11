@@ -12,15 +12,19 @@ export class ForgotPasswordResolver {
 	@Mutation((returns) => String, {
 		description: 'Forgot password'
 	})
-	async forgotPasssword(
+	async forgotUserPasssword(
 		@Arg('email', type => ForgotPasswordInput, {
 			description: "users input"
 		})
 		{email}: ForgotPasswordInput
 	): Promise<string> {
 
-		let user = await db.users.findOne({ where: { email } })
+		let user = await db.users.findOne({ where: {email: email } })
 
+		console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+		console.log(user);
+		console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+		
 		if (!user) {
 			throw new UserInputError("User not found")
 		}

@@ -7,9 +7,7 @@ function createTransporter(config: any) {
 }
 
 const defaultConfig = {
-	// name: 'Ebba Tromp',
 	host: 'smtp-mail.outlook.com',
-	// security: 'STARTTLS',
     port: 587,
     auth: {
         user: "sammydorcis@outlook.com",
@@ -23,7 +21,6 @@ const sendMail = async (email: any) => {
         const transporter = createTransporter(defaultConfig);
         await transporter.verify();
         await transporter.sendMail(email);
-		console.log("creating a new account........");
     }
 
 export default sendMail;
