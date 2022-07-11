@@ -7,7 +7,6 @@ type DoctorAttributes = {
   lastname: string,
   email: string,
   phone: string,
-  password: string,
   address: string,
   gender: string,
   department: string,
@@ -17,10 +16,6 @@ type DoctorAttributes = {
   linkedinlLink: string,
   instagramlLink: string,
   twitterlLink: string,
-  confirmed: boolean,
-  confirmToken: string,
-  passwordResetToken: string,
-  passwordResetExpires: Date
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -34,7 +29,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     phone: string;
     address: string;
     gender: string;
-    password: string;
     department: string;
     image: string;
     specialization: string;
@@ -42,10 +36,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     linkedinlLink: string;
     instagramlLink: string;
     twitterlLink: string;
-    confirmed: boolean;
-    confirmToken: string;
-    passwordResetToken: string;
-    passwordResetExpires: Date
 
     static associate(models: any) {
       // define association here
@@ -74,10 +64,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: true
       },
       phone: {
         type: DataTypes.STRING,
@@ -117,23 +103,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       department: {
         type: DataTypes.STRING,
-        allowNull: true
-      },
-      confirmed: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-      },
-      confirmToken: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      passwordResetToken: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      passwordResetExpires: {
-        type: Sequelize.DATE,
         allowNull: true
       },
     },

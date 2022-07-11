@@ -32,12 +32,6 @@ export class Doctor {
 	token: string;
 
 	@Field({ nullable: true, description: "doctor treating the patient" })
-	confirmToken: string;
-
-	@Field({ nullable: true, description: "doctor treating the patient" })
-	confirmed: boolean;
-
-	@Field({ nullable: true, description: "doctor treating the patient" })
 	rating: number;
 
 	@Field({ nullable: true, description: "doctor treating the patient" })
@@ -57,12 +51,6 @@ export class Doctor {
 
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	twitterlLink: string;
-
-	@Field({ nullable: true, description: "doctor treating the patient" })
-	passwordResetToken: string;
-
-	@Field({ nullable: true, description: "doctor treating the patient" })
-	passwordResetExpires: string;
 
 	@Field((_returns) => [Appointment],{
 		nullable: true,
@@ -128,13 +116,6 @@ export class CreateDoctorInput {
 		description: "department of a user"
 	})
 	department: string;
-
-	@Field({
-		nullable: true,
-		description: "password of the user"
-	})
-	@MinLength(8)
-	password: string;
 
 	@Field({
 		nullable: true,

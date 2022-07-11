@@ -24,10 +24,6 @@ module.exports = {
                 type: Sequelize.STRING,
                 required: true,
             },
-            password: {
-                type: Sequelize.STRING,
-                allowNull: true,
-            },
             gender: {
                 type: Sequelize.STRING,
                 allowNull: true,
@@ -78,22 +74,6 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
           },
-          confirmed: {
-               type: Sequelize.BOOLEAN,
-                allowNull: true,
-            },
-            confirmToken: {
-                type: Sequelize.STRING,
-                allowNull: true,
-            },
-            passwordResetToken: {
-                type: Sequelize.STRING,
-                allowNull: true,
-            },
-            passwordResetExpires: {
-                type: Sequelize.DATE,
-                allowNull: true,
-            },
         });
     },
     async down(queryInterface, Sequelize) {
