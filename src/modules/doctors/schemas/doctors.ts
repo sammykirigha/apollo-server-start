@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
+import { Appointment } from "../../appointments/schemas/appointment";
 
 @ObjectType()
 export class Doctor {
@@ -62,6 +63,12 @@ export class Doctor {
 
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	passwordResetExpires: string;
+
+	@Field((_returns) => [Appointment],{
+		nullable: true,
+		description: "appointments of the patients"
+	})
+	appointments!: [Appointment]
 }
 
 

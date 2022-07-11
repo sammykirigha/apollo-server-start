@@ -11,12 +11,24 @@ export class GetSingleAppointmentById {
 		input: HandleSinglePatientInput
 	): Promise<Patient>{
 		
-		let patient = await db.patients.findOne({ where: { id: input.id } })
+		let data = await db.patients.findOne({ where: { id: input.id } })
 		
-		if (!patient) {
+
+		if (!data) {
 			throw new Error("No patient like that found")
 		}
 
-		return patient as Patient
+		
+		let appointments = await db.appointments.findAll()
+
+		const count = async () => {
+			return  await data.addAppointments(appointments)
+		}
+
+		console.log("........////////", await count());
+		
+		
+
+		return data as Patient
 	}
 }

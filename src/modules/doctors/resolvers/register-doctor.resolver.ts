@@ -35,9 +35,17 @@ export class RegisterResolver {
 		const transaction = await db.sequelize.transaction();
 
 		try {
-			const doctor = await db.doctors.create(input, {
-				transaction
-			})
+			const doctor = await db.doctors.create(input,
+				{
+					include: [
+						{
+							model: db.appointments,
+						}
+					],
+				},
+				{
+					transaction
+				})
 
 			if (doctor) {
 				const authToken = crypto.randomBytes(32).toString("hex");

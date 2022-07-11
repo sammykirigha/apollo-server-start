@@ -101,8 +101,6 @@ export class CreatePatientInput {
 		description: "image of the user"
 	})
 	image: string;
-
-	
 	
 }
 
