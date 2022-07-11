@@ -11,20 +11,20 @@ export class PatientResolver {
 			}]
 		})
 
-		const getAppointments = async () => {
-			const data = await Promise.all(patients.map(async (p: any) => {
-				const found = await db.appointments.findOne({ where: { patientId: p.id } })
-				return found.dataValues
+		// const getAppointments = async () => {
+		// 	const data = await Promise.all(patients.map(async (p: any) => {
+		// 		const found = await db.appointments.findOne({ where: { patientId: p.id } })
+		// 		return found.dataValues
 				
-			}))
-			return data
-		}
+		// 	}))
+		// 	return data
+		// }
 
-		const appointments = await getAppointments()
+		// const appointments = await getAppointments()
 		
-		patients.map((patient: any) => {
-			return {...patient, appointments: appointments}
-		})
+		// patients.map((patient: any) => {
+		// 	return {...patient, appointments: appointments}
+		// })
 
 		return patients
 	}
