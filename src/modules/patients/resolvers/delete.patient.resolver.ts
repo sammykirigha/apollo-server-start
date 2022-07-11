@@ -1,9 +1,7 @@
-import { UserInputError } from "apollo-server-express";
-import { Arg, Ctx, Mutation } from "type-graphql";
+
+import { Arg, Mutation } from "type-graphql";
 import db from "../../../../models";
-import bcryptjs from 'bcryptjs'
-import { DeletePatientInput, Patient } from "../schemas/patient";
-import { sign } from "jsonwebtoken";
+import { DeletePatientInput } from "../schemas/patient";
 
 
 export class DeleteResolver {

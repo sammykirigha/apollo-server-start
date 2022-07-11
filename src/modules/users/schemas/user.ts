@@ -67,3 +67,49 @@ export class CreateUserInput {
 	password: string;
 
 }
+
+@InputType()
+export class ConfirmEmailInput {
+	@Field({ description: "confirm user email" })
+	token: string;
+}
+
+@InputType()
+export class LoginUserInput {
+
+	@Field({
+		nullable: false,
+		description: "email of a user"
+	})
+	@IsNotEmpty()
+	@IsEmail()
+	email: string;
+
+	@Field({
+		nullable: true,
+		description: "token of the user"
+	})
+	token: string;
+
+	@Field({
+		nullable: true,
+		description: "password of the user"
+	})
+	password: string;
+}
+
+@InputType()
+export class ForgotPasswordInput {
+	@Field({ description: "email of the user" })
+	email: string;
+}
+
+@InputType()
+export class PasswordResetInput {
+	@Field({ description: 'token of a user' })
+	token: string
+
+	@Field({ description: 'password of a user' })
+	password: string
+}
+

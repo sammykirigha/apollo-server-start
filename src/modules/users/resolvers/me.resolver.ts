@@ -1,37 +1,37 @@
 
 import { Ctx, Query } from "type-graphql";
 import db from "../../../../models";
-import { Patient } from "../schemas/patient";
 import { sign } from "jsonwebtoken";
+import { User } from "../schemas/user";
 import { Context } from "../../../common/interfaces/context.interface";
 
 
 export class MeResolver {
-	@Query(returns => Patient, {
+	@Query(returns => User, {
 		description: "get the current user"
 	})
-	async currentPatient(
-		@Ctx() ctx: Context): Promise<Patient | null> {
+	async currentUser(
+		@Ctx() ctx: Context): Promise<User | null> {
 
-		let patientId = ctx.user.id
+		let userId = ctx.user.id
 
-		if (!patientId) {
+		if (!userId) {
 			return null
 		}
 
-		let patient = await db.patients.findByPk(patientId)
+		let user = await db.users.findByPk(userId)
 
 		const newToken = sign(
 			{
-				id: patient.id,
-				status: patient.status,
-				email: patient.email
+				id: user.id,
+				status: user.status,
+				email: user.email
 			},
 			'sammykightgfhgcvbnb',
 			{ expiresIn: '24h' }
 		)
 
-		patient.token = newToken;
-		return patient;
+		user.token = newToken;
+		return user;
 	}
 }

@@ -2,14 +2,14 @@ import { UserInputError } from "apollo-server-express";
 import { Arg, Mutation, Resolver } from "type-graphql";
 import db from "../../../../models";
 import bcryptjs from 'bcryptjs'
-import { PasswordResetInput } from "../schemas/patient";
 import crypto from 'crypto';
 import { Op } from "sequelize";
+import { PasswordResetInput } from "../schemas/user";
 
 @Resolver()
 export class ResetPasswordResolver {
 	@Mutation(returns => String, {
-		description: "reset patients password"
+		description: "reset users password"
 	})
 	async resetPassword(
 		@Arg('input', type => PasswordResetInput, {
@@ -27,7 +27,7 @@ export class ResetPasswordResolver {
 		console.log(hashedResetToken);
 		
 
-		let patient = await db.patients.findOne({
+		let user = await db.users.findOne({
 			where:
 			{
 				passwordResetToken: hashedResetToken,
@@ -37,7 +37,7 @@ export class ResetPasswordResolver {
 			}
 		})
 
-		if (!patient) {
+		if (!user) {
 			throw new UserInputError(
 				"User not found...."
 			)
@@ -46,13 +46,13 @@ export class ResetPasswordResolver {
 		const salt = await bcryptjs.genSaltSync(10)
 		const hashedPassword = await bcryptjs.hashSync(password, salt);
 
-		patient.password = hashedPassword;
+		user.password = hashedPassword;
 
-		patient.passwordResetToken = null;
-		patient.passwordResetExpires = null;
+		user.passwordResetToken = null;
+		user.passwordResetExpires = null;
 
 
-		await patient.save()
+		await user.save()
 
 		return "Your password has been reset successfully"
 
