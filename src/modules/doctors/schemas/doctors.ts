@@ -159,53 +159,10 @@ export class CreateDoctorInput {
 }
 
 @InputType()
-export class CreatePasswordInput {
-	@Field({ description: 'token of a patient' })
-	token: string
-
-	@Field({ description: 'password of a patient' })
-	password: string
-}
-
-@InputType()
-export class LoginDoctorInput {
-	@Field({
-		nullable: false,
-		description: "email of a user"
-	})
-	@IsNotEmpty()
-	@IsEmail()
-	email: string;
-
-	@Field({
-		nullable: false,
-		description: "password of the user"
-	})
-	password: string;
-}
-
-@InputType()
-export class ForgotDoctorsPasswordInput {
-	@Field({ description: "email of the doctor" })
-	email: string;
-}
-
-
-@InputType()
-export class ResetDoctorsPasswordInput{
-	@Field({ description: 'token of a patient' })
-	token: string
-
-	@Field({ description: 'password of a patient' })
-	password: string
-}
-
-@InputType()
 export class DeleteDoctorInput {
 	@Field()
 	id: string
 }
-
 
 @InputType()
 export class UpdateDoctorInput {
