@@ -49,7 +49,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       patientId: {
         type: Sequelize.UUID,
-        allowNull: false
+        allowNull: false,
+        references: {model: 'patients', key: 'id'},
       },
       patient_email: {
         type: DataTypes.STRING,
@@ -65,6 +66,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       doctorId: {
         type: Sequelize.UUID,
+        references: {model: 'doctors', key: 'id'},
         allowNull: false
       },
       date: {

@@ -37,6 +37,9 @@ export class Appointment {
 
 	@Field({ description: "status of the appointment" })
 	status: string;
+
+	@Field({ description: "status of the appointment" })
+	description: string;
 }
 
 @InputType()

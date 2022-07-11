@@ -1,6 +1,5 @@
 import { Query , UseMiddleware } from "type-graphql";
 import db from "../../../../models";
-import { isAuth } from "../../../middlewares/auth.middleware";
 import { Doctor } from "../schemas/doctors";
 
 
@@ -15,20 +14,20 @@ export class DoctorResolver {
 			}]
 		})
 
-		const getAppointments = async () => {
-			const data = await Promise.all(doctors.map(async (doc: any) => {
-				const found = await db.appointments.findOne({ where: { doctorId: doc.id } })
-				return found.dataValues
+		// const getAppointments = async () => {
+		// 	const data = await Promise.all(doctors.map(async (doc: any) => {
+		// 		const found = await db.appointments.findOne({ where: { doctorId: doc.id } })
+		// 		return found.dataValues
 				
-			}))
-			return data
-		}
+		// 	}))
+		// 	return data
+		// }
 
-		const appointments = await getAppointments()
+		// const appointments = await getAppointments()
 		
-		doctors.map((doc: any) => {
-			return {...doc, appointments: appointments}
-		})
+		// doctors.map((doc: any) => {
+		// 	return {...doc, appointments: appointments}
+		// })
 
 		return doctors
 	}
