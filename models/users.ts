@@ -57,6 +57,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     confirmed: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: true,
     },
     confirmToken: {

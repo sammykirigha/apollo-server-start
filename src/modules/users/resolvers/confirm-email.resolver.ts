@@ -2,7 +2,7 @@ import { UserInputError } from "apollo-server-express";
 import { Arg, Mutation, Resolver } from "type-graphql";
 import db from "../../../../models";
 import bcryptjs from 'bcryptjs'
-import { ConfirmEmailInput, PasswordResetInput } from "../schemas/patient";
+import { ConfirmEmailInput } from "../schemas/user";
 import crypto from 'crypto';
 import { Op } from "sequelize";
 
@@ -13,7 +13,7 @@ export class ConfirmEmailResolver {
 	})
 	async confirmPassword(
 		@Arg('input', type => ConfirmEmailInput, {
-			description: "Create Patients Input"
+			description: "confirm user eamil input"
 		})
 		{ token }: ConfirmEmailInput
 	): Promise<string> {
@@ -24,23 +24,23 @@ export class ConfirmEmailResolver {
 			.update(token)
 			.digest("hex");
 		
-		let patient = await db.patients.findOne({
+		let user = await db.users.findOne({
 			where:
 			{
 				confirmToken: hashedAuthToken
 			}
 		})
 
-		if (!patient) {
+		if (!user) {
 			throw new UserInputError(
 				"User not found...."
 			)
 		}
 
-		patient.confirmed = true;
-		patient.confirmToken = null;
+		user.confirmed = true;
+		user.confirmToken = null;
 
-		await patient.save()
+		await user.save()
 
 
 		return "You can continue to log in with your credentials...."

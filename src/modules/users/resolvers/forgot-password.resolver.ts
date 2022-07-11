@@ -3,7 +3,8 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import db from "../../../../models";
 import crypto from 'crypto';
 import sendMail from "../../../utils/sendEmail";
-import { ForgotPasswordInput } from "../schemas/patient";
+import { ForgotPasswordInput } from "../schemas/user";
+import { type } from "os";
 
 
 @Resolver()
@@ -12,13 +13,15 @@ export class ForgotPasswordResolver {
 		description: 'Forgot password'
 	})
 	async forgotPasssword(
-		@Arg('email')
+		@Arg('email', type => ForgotPasswordInput, {
+			description: "users input"
+		})
 		{email}: ForgotPasswordInput
 	): Promise<string> {
 
-		let patient = await db.patients.findOne({ where: { email } })
+		let user = await db.users.findOne({ where: { email } })
 
-		if (!patient) {
+		if (!user) {
 			throw new UserInputError("User not found")
 		}
 
@@ -32,7 +35,7 @@ export class ForgotPasswordResolver {
 				name: "Samuel Kirigha",
 				address: "sammydorcis@outlook.com"
 			},
-			to: `${patient.email}`,
+			to: `${user.email}`,
 			subject: "Password reset Email",
 			text: "Please check your email to confirm before you continue. The email is valid for 30 min",
 			html: `<p>To complete your change of sign-in method, please confirm your email address
@@ -40,10 +43,10 @@ export class ForgotPasswordResolver {
 		}
 		)
 
-		patient.passwordResetToken = passwordResetToken;
-		patient.passwordResetExpires = passwordResetExpires;
+		user.passwordResetToken = passwordResetToken;
+		user.passwordResetExpires = passwordResetExpires;
 
-		await patient.save();
+		await user.save();
 
 		return "Password Reset link sent to the email provided"
 	}
