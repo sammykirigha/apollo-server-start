@@ -6,15 +6,10 @@ type PatientAttributes = {
     firstname: string,
     lastname: string,
     email: string,
-    password: string,
     phone: string,
     gender: string,
     address: string,
     image: string;
-    confirmed: boolean,
-    confirmToken: string,
-    passwordResetToken: string,
-    passwordResetExpires: Date
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -25,15 +20,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
         firstname: string;
         lastname: string;
         email: string;
-        password: string;
         phone: string;
         gender: string;
         address: string;
         image: string;
-        confirmed: boolean;
-        confirmToken: string;
-        passwordResetToken: string;
-        passwordResetExpires: Date;
 
         static associate(models: any) {
             // define association here
@@ -62,10 +52,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            password: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
             phone: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -80,23 +66,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
             },
              image: {
                 type: DataTypes.STRING,
-                allowNull: true
-            },
-            confirmed: {
-                type: Sequelize.BOOLEAN,
-                defaultValue: false,
-                allowNull: false
-            },
-            confirmToken: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            passwordResetToken: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            passwordResetExpires: {
-                type: Sequelize.DATE,
                 allowNull: true
             },
         },

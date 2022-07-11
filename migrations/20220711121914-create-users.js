@@ -1,37 +1,50 @@
 "use strict";
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable("patients", {
+        await queryInterface.createTable("users", {
             id: {
-                primaryKey: true,
                 allowNull: false,
+                primaryKey: true,
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
-            },
-            firstname: {
-                type: Sequelize.STRING,
-                required: true,
-            },
-            lastname: {
-                type: Sequelize.STRING,
-                required: true,
             },
             email: {
                 type: Sequelize.STRING,
                 required: true,
             },
-            phone: {
-                type: Sequelize.STRING,
-            },
-            gender: {
+            username: {
                 type: Sequelize.STRING,
                 required: true,
             },
-            address: {
+            password: {
                 type: Sequelize.STRING,
                 required: true,
             },
-           
+            role: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            confirmed: {
+                type: Sequelize.BOOLEAN,
+                allowNull: true,
+            },
+            confirmToken: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
+            passwordResetToken: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
+            passwordResetExpires: {
+                type: Sequelize.DATE,
+                allowNull: true,
+            },
+            token: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
+
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
@@ -43,6 +56,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable("patients");
+        await queryInterface.dropTable("users");
     },
 };

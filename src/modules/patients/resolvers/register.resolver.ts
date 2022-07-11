@@ -77,7 +77,6 @@ export class RegisterResolver {
 
 				// patient.confirmed = true
 				transaction.commit();
-				patient.confirmToken = hashedAuthToken;
 				await patient.save()
 
 				const token = sign({
@@ -89,7 +88,7 @@ export class RegisterResolver {
 				patient.token = token;
 				return patient as Patient;
 			} else {
-				throw new Error(`Could not create user`);
+				throw new Error(`Could not create patient`);
 			}
 
 		} catch (error) {

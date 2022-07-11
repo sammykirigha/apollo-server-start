@@ -1,6 +1,5 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
-import { PatientStatus } from "../../../common/enums/appointment.enum";
 import { Appointment } from "../../appointments/schemas/appointment";
 
 @ObjectType()

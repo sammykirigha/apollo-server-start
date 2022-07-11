@@ -18,7 +18,8 @@ type AppointmentAttributes = {
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  const { Sequelize } = sequelize; class Appointment extends Model {
+  const { Sequelize } = sequelize;
+  class Appointment extends Model<AppointmentAttributes> implements AppointmentAttributes {
 
     id: string;
     patientId: string;

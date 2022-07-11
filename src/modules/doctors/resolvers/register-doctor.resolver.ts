@@ -70,7 +70,6 @@ export class RegisterResolver {
 
 				// doctor.confirmed = true
 				transaction.commit();
-				doctor.confirmToken = hashedAuthToken;
 				await doctor.save()
 
 				const token = sign(
