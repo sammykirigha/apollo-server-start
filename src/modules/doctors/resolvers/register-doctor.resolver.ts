@@ -20,7 +20,7 @@ export class RegisterResolver {
 		let doctor = await db.doctors.findOne({ where: { email: input.email } })
 		if (doctor) {
 			throw new UserInputError(
-				"Doctor with that email already exists"
+				"Your account already exist..."
 			)
 		}
 

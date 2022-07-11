@@ -18,30 +18,26 @@ export class RegisterResolver {
 		input: CreatePatientInput
 	): Promise<Patient> {
 
-		let user = await db.patients.findOne({ where: { email: input.email } })
-		if (user) {
+		let patient = await db.patients.findOne({ where: { email: input.email } })
+		if (patient) {
 			throw new UserInputError(
 				"User with that email already exists"
 			)
 		}
 
-		user = await db.patients.findOne({ where: { phone: input.phone } })
-		if (user) {
+		patient = await db.patients.findOne({ where: { phone: input.phone } })
+		if (patient) {
 			throw new UserInputError(
 				"User with that phone number already exists"
 			)
 		}
-
-		const salt = await bcryptjs.genSaltSync(10)
-		const hashedPassword = await bcryptjs.hashSync(input.password, salt);
 
 		// Add Patient
 		const transaction = await db.sequelize.transaction();
 
 		try {
 			const patient = await db.patients.create({
-				...input,
-				password: hashedPassword
+				...input
 			}, {
 				include: [
 					{
@@ -54,28 +50,30 @@ export class RegisterResolver {
 				})
 
 			if (patient) {
-				const authToken = crypto.randomBytes(32).toString("hex");
-				const hashedAuthToken = crypto
-					.createHash("sha256")
-					.update(authToken)
-					.digest("hex");
 
-				const link = `https://promis.co.ke/logins/email/confirm/${authToken}`
+				await sendMail({
+					from: {
+						name: "Samuel Kirigha",
+						address: "sammydorcis@outlook.com"
+					},
+					to: `${patient.email}`,
+					subject: "Patient Account Created",
+					// text: "Please check your email to confirm before you continue. The email is valid for 30 min",
+					html: `<p>You have successfully created an patient account.Please make complete your profile</p>`
+				}
+				)
 
-				// await sendMail({
-				// 	from: {
-				// 		name: "Samuel Kirigha",
-				// 		address: "sammydorcis@outlook.com"
-				// 	},
-				// 	to: `${patient.email}`,
-				// 	subject: "Confirmation Email",
-				// 	text: "Please check your email to confirm before you continue. The email is valid for 30 min",
-				// 	html: `<p>To complete your change of sign-in method, please confirm your email address
-				// 	by clicking this link: <a href="${link}">${link}</a></p>`
-				// }
-				// )
+				//update users table role for this patient
+				const thisPatient = await db.users.findOne({ where: { email: patient.email } })
+				
+				if (thisPatient) {
+					thisPatient.role = "patient"
+					thisPatient.save()
+				} else {
+					throw new Error("Unexpected error occured please try again later")
+				}
 
-				// patient.confirmed = true
+
 				transaction.commit();
 				await patient.save()
 

@@ -80,7 +80,6 @@ async function startApolloServer() {
         `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
     );
 
-    // await sendMail(email)
    
 }
 
