@@ -28,9 +28,6 @@ export class Patient {
 	@Field({ description: "address of the patient" })
 	address: string;
 
-	@Field({ description: "confirmed email of the patient's appointmnet" })
-	confirmed: string;
-
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	token: string;
 
@@ -87,13 +84,6 @@ export class CreatePatientInput {
 		description: "address of a user"
 	})
 	address: string;
-
-	@Field({
-		nullable: true,
-		description: "password of the user"
-	})
-	@MinLength(8)
-	password: string;
 
 	@Field({
 		nullable: true,
