@@ -6,6 +6,7 @@ import { CreatePatientInput, Patient } from "../schemas/patient";
 import { sign } from "jsonwebtoken";
 import sendMail from "../../../utils/sendEmail";
 import crypto from 'crypto';
+import loadTemplate from "../../../utils/loadEmailTemplate";
 
 export class RegisterResolver {
 	@Mutation(returns => Patient, {
@@ -51,6 +52,7 @@ export class RegisterResolver {
 
 			if (patient) {
 
+				// const htmlData = await loadTemplate('register-email', { name: user.firstName, accountType: user.role })
 				await sendMail({
 					from: {
 						name: "Samuel Kirigha",

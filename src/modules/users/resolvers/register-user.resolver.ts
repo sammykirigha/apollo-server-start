@@ -6,6 +6,7 @@ import bcryptjs from 'bcryptjs';
 import { sign } from "jsonwebtoken";
 import crypto from 'crypto';
 import sendMail from "../../../utils/sendEmail";
+import loadTemplate from "../../../utils/loadEmailTemplate";
 
 export class RegisterUserResolver {
 	@Mutation(returns => User, {
@@ -48,6 +49,8 @@ export class RegisterUserResolver {
 
 				const link = `https://promis.co.ke/logins/email/confirm/${authToken}`
 
+				const htmlData = await loadTemplate('email', { name: user.firstName, accountType: user.role, link: link })
+
 				await sendMail({
 					from: {
 						name: "Samuel Kirigha",
@@ -56,8 +59,9 @@ export class RegisterUserResolver {
 					to: `${user.email}`,
 					subject: "Confirmation Email",
 					text: "Please check your email to confirm before your registration before you continue. The email is valid for 30 min",
-					html: `<p>To complete your change of sign-in method, please confirm your email address
-					by clicking this link: <a href="${link}">${link}</a></p>`
+					html: htmlData
+					// `<p>To complete your change of sign-in method, please confirm your email address
+					// by clicking this link: <a href="${link}">${link}</a></p>`
 				}
 				)
 

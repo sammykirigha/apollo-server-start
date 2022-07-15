@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0px;
+		}
+
+		.wrapper {
+			width: 100%;
+			Padding-bottom: 50px;
+			background-color: #f4f4f4;
+		}
+
+		table,
+		tr,
+		td {
+			border-spacing: 0;
+		}
+	</style>
+</head>
+
+<body style="background-color: #f4f4f4;">
+	<table class="wrapper">
+		<tr>
+			<td>
+				<table width="600"  style="margin: 20px auto;">
+					<tr>
+						<td style="background-color: white;margin-top: 10px;">
+							<table>
+								<!-- Header -->
+								<tr>
+									<td style="padding: 20px;">
+										<h2 style="text-align: center;">Welcome to Doctris</h2>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="padding: 20px;border-radius: 10px;">
+										<h3 style="margin-bottom: 10px;">Hello <%=name%></h3>
+										<br>
+										<p>You have successfully created an account in <a
+												href="https://doctris.co.ke"><b>Doctris Platform</b></a> as
+											a <%=accountType%>. Please follow the following link <a href="<%=link%>"><%=link%></a> to confirm your registration with us. You
+											can then continue to create a patient account or a doctor account and update your profile
+										</p>
+										<br>
+										<br>
+										<p>For assistance, or if you've received this in error, contact us at
+											info@doctris.co.ke.</p>
+									</td>
+								</tr>
+
+								<!-- Footer -->
+							</table>
+						</td>
+					</tr>
+
+
+
+				</table>
+
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>
