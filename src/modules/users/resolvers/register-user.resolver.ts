@@ -49,7 +49,7 @@ export class RegisterUserResolver {
 
 				const link = `https://promis.co.ke/logins/email/confirm/${authToken}`
 
-				const htmlData = await loadTemplate('email', { name: user.firstName, accountType: user.role, link: link })
+				const htmlData = await loadTemplate('registration-email', { name: user.username, accountType: user.role, link: link })
 
 				await sendMail({
 					from: {
