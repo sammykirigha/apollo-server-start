@@ -1,6 +1,6 @@
 import { Arg, Mutation } from "type-graphql";
 import db from "../../../../models";
-import { DeleteDoctorInput } from "../schemas/doctors";
+import { HandleSingleDoctorInput } from "../schemas/doctors";
 
 
 export class DeleteDoctorsResolver {
@@ -9,10 +9,10 @@ export class DeleteDoctorsResolver {
 		description: "delete doctor mutation"
 	})
 	async deleteDoctor(
-		@Arg('input', type => DeleteDoctorInput, {
+		@Arg('input', type => HandleSingleDoctorInput, {
 			description: "login doctors Input"
 		})
-		input: DeleteDoctorInput,
+		input: HandleSingleDoctorInput,
 	): Promise<string> {
 
 		const doctor = await db.doctors.findOne({ where: { id: input.id } })

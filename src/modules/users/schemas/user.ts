@@ -87,12 +87,6 @@ export class LoginUserInput {
 
 	@Field({
 		nullable: true,
-		description: "token of the user"
-	})
-	token: string;
-
-	@Field({
-		nullable: true,
 		description: "password of the user"
 	})
 	password: string;

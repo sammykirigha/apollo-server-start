@@ -12,6 +12,7 @@ type DoctorAttributes = {
   department: string,
   image: string,
   specialization: string,
+  experience: string,
   facebooklLink: string,
   linkedinlLink: string,
   instagramlLink: string,
@@ -32,6 +33,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     department: string;
     image: string;
     specialization: string;
+    experience: string;
     facebooklLink: string;
     linkedinlLink: string;
     instagramlLink: string;
@@ -82,6 +84,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: true
       },
       specialization: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      experience: {
         type: DataTypes.STRING,
         allowNull: true
       },
