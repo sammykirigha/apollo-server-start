@@ -15,13 +15,13 @@ export class ResetPasswordResolver {
 		@Arg('input', type => PasswordResetInput, {
 			description: "Create Patients Input"
 		})
-		{ token, password }: PasswordResetInput
+		input: PasswordResetInput
 	): Promise<string> {
 
 
 		const hashedResetToken = crypto
 			.createHash("sha256")
-			.update(token)
+			.update(input.token)
 			.digest("hex");
 		
 		console.log(hashedResetToken);
@@ -44,7 +44,7 @@ export class ResetPasswordResolver {
 		}
 
 		const salt = await bcryptjs.genSaltSync(10)
-		const hashedPassword = await bcryptjs.hashSync(password, salt);
+		const hashedPassword = await bcryptjs.hashSync(input.password, salt);
 
 		user.password = hashedPassword;
 

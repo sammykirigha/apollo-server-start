@@ -1,22 +1,22 @@
 
-import { Ctx, Query } from "type-graphql";
+import { Authorized, Ctx, Query } from "type-graphql";
 import db from "../../../../models";
 import { sign } from "jsonwebtoken";
 import { User } from "../schemas/user";
 import { Context } from "../../../common/interfaces/context.interface";
 
-
 export class MeResolver {
 	@Query(returns => User, {
 		description: "get the current user"
 	})
+	@Authorized()
 	async currentUser(
 		@Ctx() ctx: Context): Promise<User | null> {
 
-		let userId = ctx.user.id
+		let userId = ctx.user?.id
 
 		if (!userId) {
-			return null
+			throw new Error("Invalid access token")
 		}
 
 		let user = await db.users.findByPk(userId)

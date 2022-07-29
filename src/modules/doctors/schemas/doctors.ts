@@ -170,56 +170,69 @@ export class CreateDoctorInput {
 }
 
 @InputType()
-export class HandleSingleDoctorInput {
+export class GetSingleDoctorInputById {
 	@Field()
 	id: string
 }
 
 @InputType()
-export class UpdateDoctorInput {
-	@Field({
-		nullable: false,
-		description: "Username of a user"
-	})
-	id: string
-
-	@Field({
-		nullable: false,
-		description: "Username of a user"
-	})
-	firstname: string
-
-	@Field({
-		nullable: false,
-		description: "Username of a user"
-	})
-	lastname: string;
+export class GetSingleDoctorInputByEmail {
+	
 
 	@Field({
 		nullable: false,
 		description: "email of a user"
 	})
+	@IsNotEmpty()
 	@IsEmail()
 	email: string;
+} 
+
+@InputType()
+export class UpdateDoctorInput {
+	@Field({
+		nullable: true,
+		description: "Username of a user"
+	})
+	id: string
 
 	@Field({
-		nullable: false,
+		nullable: true,
+		description: "Username of a user"
+	})
+	firstname?: string
+
+	@Field({
+		nullable: true,
+		description: "Username of a user"
+	})
+	lastname?: string;
+
+	@Field({
+		nullable: true,
+		description: "email of a user"
+	})
+	@IsEmail()
+	email?: string;
+
+	@Field({
+		nullable: true,
 		description: "address of a user"
 	})
-	address: string;
+	address?: string;
 
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "phone of a user"
 	})
-	phone: string;
+	phone?: string;
 
 	@Field({
 		nullable: true,
 		description: "gender of a user"
 	})
-	gender: string;
+	gender?: string;
 
 	@Field({
 		nullable: true,

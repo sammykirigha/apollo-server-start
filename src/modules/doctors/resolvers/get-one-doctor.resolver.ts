@@ -1,17 +1,17 @@
 import { Arg, Query } from "type-graphql";
 import db from "../../../../models";
-import { Doctor, HandleSingleDoctorInput } from "../schemas/doctors";
+import { Doctor, GetSingleDoctorInputByEmail } from "../schemas/doctors";
 
-export class GetSingleAppointmentById {
+export class GetSingleDoctorByEmail {
 	@Query((returns) => Doctor)
 	async getOneDoctor(
-		@Arg('input', type => HandleSingleDoctorInput, {
+		@Arg('input', type => GetSingleDoctorInputByEmail, {
 			description: "fetch one Doctor"
 		})
-		input: HandleSingleDoctorInput
+		input: GetSingleDoctorInputByEmail
 	): Promise<Doctor>{
 		
-		let data = await db.doctors.findOne({ where: { id: input.id }, include: [{
+		let data = await db.doctors.findOne({ where: { email: input.email }, include: [{
 				model: db.appointments,
 			}] })
 		

@@ -38,11 +38,6 @@ export class LoginResolver {
 		}, 'sammykightgfhgcvbnb', { expiresIn: '24h' })
 
 		user.token = newToken;
-		
-		// if (!patient.confirmed) {
-		// 	return null
-		// }
-
 		return user;
 	}
 }
