@@ -34,6 +34,24 @@ export class Patient {
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	image: string;
 
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	dateOfBirth: Date;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	disability: boolean;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	county: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	bloodGroup: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	nationality: string;
+
+	@Field({ nullable: true, description: "doctor treating the patient" })
+	maritalStatus: string;
+
 	@Field((_returns) => [Appointment],{
 		nullable: true,
 		description: "appointments of the patients"
@@ -90,6 +108,42 @@ export class CreatePatientInput {
 		description: "image of the user"
 	})
 	image: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	dateOfBirth: Date;
+
+	@Field({
+		nullable: false,
+		description: "image of the user"
+	})
+	disability: boolean;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	county: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	bloodGroup: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	nationality: string;
+
+	@Field({
+		nullable: true,
+		description: "image of the user"
+	})
+	maritalStatus: string;
 	
 }
 

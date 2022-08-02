@@ -221,7 +221,6 @@ export class UpdateDoctorInput {
 	})
 	address?: string;
 
-
 	@Field({
 		nullable: true,
 		description: "phone of a user"
@@ -260,6 +259,12 @@ export class UpdateDoctorInput {
 	})
 	specialization: string;
 
+	@Field({
+		nullable: true,
+		description: "experience of the user"
+	})
+	experience: string;
+
 
 	@Field({
 		nullable: true,
@@ -293,6 +298,27 @@ export class UpdateDoctorInput {
 		description: "twitterlLink of the user"
 	})
 	twitterlLink: string;
+}
+
+@InputType()
+export class ChangePasswordInput {
+	@Field({
+		nullable: true,
+		description: "Username of a user"
+	})
+	id: string
+
+	@Field({
+		nullable: true,
+		description: "password of a user"
+	})
+	password: string
+
+	@Field({
+		nullable: true,
+		description: "newPassword of a user"
+	})
+	newPassword: string
 }
 
 

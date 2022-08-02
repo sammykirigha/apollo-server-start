@@ -10,6 +10,12 @@ type PatientAttributes = {
     gender: string,
     address: string,
     image: string;
+    dateOfBirth: Date;
+    disability: boolean;
+    county: string;
+    bloodGroup: string;
+    nationality: string;
+    maritalStatus: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -24,6 +30,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
         gender: string;
         address: string;
         image: string;
+        dateOfBirth: Date;
+        disability: boolean;
+        county: string;
+        bloodGroup: string;
+        nationality: string;
+        maritalStatus: string;
 
         static associate(models: any) {
             // define association here
@@ -64,9 +76,33 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-             image: {
+            image: {
                 type: DataTypes.STRING,
                 allowNull: true
+            },
+            dateOfBirth: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
+            disability: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false
+            },
+            county: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            bloodGroup: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            maritalStatus: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            nationality: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
         },
         {
