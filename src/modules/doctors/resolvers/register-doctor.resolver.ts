@@ -1,5 +1,5 @@
 import { UserInputError } from "apollo-server-express";
-import { Arg, Mutation } from "type-graphql";
+import { Arg, Mutation, Authorized, Ctx } from "type-graphql";
 import db from "../../../../models";
 import { sign } from "jsonwebtoken";
 import sendMail from "../../../utils/sendEmail";
@@ -10,7 +10,9 @@ export class RegisterResolver {
 	@Mutation(returns => Doctor, {
 		description: "Create doctor mutation"
 	})
+	@Authorized()
 	async createDoctor(
+		@Ctx()
 		@Arg('input', type => CreateDoctorInput, {
 			description: "Create doctors Input"
 		})
@@ -85,7 +87,7 @@ export class RegisterResolver {
 				doctor.token = token;
 				return doctor as Doctor;
 			} else {
-				throw new Error(`Could not create user`);
+				throw new Error(`Something wrong happened!!!`);
 			}
 
 		} catch (error) {

@@ -51,7 +51,6 @@ export class RegisterResolver {
 				})
 
 			if (patient) {
-
 				// const htmlData = await loadTemplate('register-email', { name: user.firstName, accountType: user.role })
 				await sendMail({
 					from: {
@@ -77,7 +76,7 @@ export class RegisterResolver {
 
 
 				transaction.commit();
-				await patient.save()
+				await patient.save();
 
 				const token = sign({
 					id: patient.id,

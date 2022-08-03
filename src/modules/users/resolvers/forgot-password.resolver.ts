@@ -21,18 +21,16 @@ export class ForgotPasswordResolver {
 
 		let user = await db.users.findOne({ where: {email: email } })
 
-		console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 		console.log(user);
-		console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 		
 		if (!user) {
 			throw new UserInputError("User not found")
 		}
 
-		const resetToken = crypto.randomBytes(32).toString("hex")
-		const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest("hex")
+		const resetToken = crypto.randomBytes(32).toString("hex") 
+		const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest("hex") 
 
-		const passwordResetExpires = Date.now() + 20 * 60 * 1000;
+		const passwordResetExpires = Date.now() + 30 * 60 * 1000;
 
 		await sendMail({
 			from: {
@@ -43,7 +41,7 @@ export class ForgotPasswordResolver {
 			subject: "Password reset Email",
 			text: "Please check your email to confirm before you continue. The email is valid for 30 min",
 			html: `<p>To complete your change of sign-in method, please confirm your email address
-					by clicking this link: <a href="${resetToken}">${resetToken}</a></p>`
+					by clicking this link: <a href="http://localhost:3000/reset-password/${resetToken}">Reset Password</a></p>`
 		}
 		)
 
