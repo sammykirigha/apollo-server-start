@@ -5,8 +5,10 @@ import { userRoleStatus } from "../src/common/enums/userRoles.enum";
 type UserAttributes = {
   id: string,
   username: string,
+  user_id: string,
   email: string,
   password: string,
+  token: string,
   role: userRoleStatus,
   confirmed: boolean,
   confirmToken: string,
@@ -15,13 +17,15 @@ type UserAttributes = {
 }
 module.exports = (sequelize: any, DataTypes: any) => {
   const { Sequelize } = sequelize;
-  class User extends Model<UserAttributes> implements UserAttributes {
+  class logedInUser extends Model<UserAttributes> implements UserAttributes {
 
     id: string;
+    user_id: string;
     email: string;
     username: string;
     role: userRoleStatus;
-    password: string
+    password: string;
+    token: string;
     confirmed: boolean;
     confirmToken: string;
     passwordResetToken: string;
@@ -31,7 +35,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       // define association here
     }
   }
-  User.init({
+  logedInUser.init({
     id: {
       primaryKey: true,
       allowNull: false,
@@ -42,11 +46,15 @@ module.exports = (sequelize: any, DataTypes: any) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-     role: {
-        type: Sequelize.ENUM("user", "admin", "patient", "doctor"),
-        defaultValue: "user",
-        allowNull: false
-      },
+    user_id: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    role: {
+      type: Sequelize.ENUM("user", "admin", "patient", "doctor"),
+      defaultValue: "user",
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false
@@ -54,6 +62,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     confirmed: {
       type: DataTypes.BOOLEAN,
@@ -75,12 +87,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
   },
     {
       sequelize,
-      modelName: "users",
-      tableName: "users",
+      modelName: "logged_in_users",
+      tableName: "logged_in_users",
       timestamps: true,
       freezeTableName: true,
     }
 
   );
-  return User;
+  return logedInUser;
 };

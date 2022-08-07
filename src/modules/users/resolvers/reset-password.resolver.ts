@@ -27,7 +27,7 @@ export class ResetPasswordResolver {
 		console.log(hashedResetToken);
 		
 
-		let user = await db.users.findOne({
+		let user = await db.logginedInUsers.findOne({
 			where:
 			{
 				passwordResetToken: hashedResetToken,

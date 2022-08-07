@@ -35,7 +35,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     fees: string;
 
     static associate(models: any) {
-      // define association here
       Appointment.belongsTo(models.patients);
       Appointment.belongsTo(models.doctors);
     }

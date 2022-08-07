@@ -1,12 +1,16 @@
-"use strict";
+'use strict';
 module.exports = {
-    async up(queryInterface, Sequelize) {
-        await queryInterface.createTable("logginedInUsers", {
-            id: {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('logged_in_users', {
+      id: {
                 allowNull: false,
                 primaryKey: true,
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
+            },
+             user_id: {
+                allowNull: true,
+                type: Sequelize.STRING,
             },
             email: {
                 type: Sequelize.STRING,
@@ -53,9 +57,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
-        });
-    },
-    async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable("logginedInUsers");
-    },
+    });
+  },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('logged_in_users');
+  }
 };

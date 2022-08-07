@@ -24,7 +24,7 @@ export class ConfirmEmailResolver {
 			.update(token)
 			.digest("hex");
 		
-		let user = await db.users.findOne({
+		let user = await db.logginedInUsers.findOne({
 			where:
 			{
 				confirmToken: hashedAuthToken

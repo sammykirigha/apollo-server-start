@@ -19,7 +19,7 @@ export class ForgotPasswordResolver {
 		{email}: ForgotPasswordInput
 	): Promise<string> {
 
-		let user = await db.users.findOne({ where: {email: email } })
+		let user = await db.logginedInUsers.findOne({ where: {email: email } })
 
 		console.log(user);
 		

@@ -19,7 +19,7 @@ export class MeResolver {
 			throw new Error("Invalid access token")
 		}
 
-		let user = await db.users.findByPk(userId)
+		let user = await db.logginedInUsers.findByPk(userId)
 
 		const newToken = sign(
 			{
