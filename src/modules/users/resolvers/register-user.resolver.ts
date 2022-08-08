@@ -60,8 +60,6 @@ export class RegisterUserResolver {
 					subject: "Confirmation Email",
 					text: "Please check your email to confirm before your registration before you continue. The email is valid for 30 min",
 					html: htmlData
-					// `<p>To complete your change of sign-in method, please confirm your email address
-					// by clicking this link: <a href="${link}">${link}</a></p>`
 				}
 				)
 
