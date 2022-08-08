@@ -53,9 +53,8 @@ export class CreatePatientByDoctorResolver {
 
 			if (patient) {
 				// const htmlData = await loadTemplate('register-email', { name: user.firstName, accountType: user.role })
-				console.log('<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>');
+				
 				let loggedInUser = await db.logged_in_users.findOne({ where: { user_id: patient.id } })
-				console.log('<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>', loggedInUser);
 
 				if (loggedInUser) {
 					throw new UserInputError(
@@ -88,8 +87,6 @@ export class CreatePatientByDoctorResolver {
 						transaction
 					}
 				)
-
-				console.log('<<<<<>>>>user', user);
 				
 
 				await user.save();

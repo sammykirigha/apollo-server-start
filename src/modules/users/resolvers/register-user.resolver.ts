@@ -65,6 +65,8 @@ export class RegisterUserResolver {
 
 				transaction.commit();
 				user.confirmToken = hashedAuthToken;
+				console.log('this user', user);
+				
 				await user.save()
 
 				const token = sign({
