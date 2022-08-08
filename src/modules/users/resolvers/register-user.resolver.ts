@@ -47,7 +47,7 @@ export class RegisterUserResolver {
 					.update(authToken)
 					.digest("hex");
 
-				const link = `https://localhost:3000/confirm/${authToken}`
+				const link = `https://localhost:3001/confirm/${authToken}`
 
 				const htmlData = await loadTemplate('registration-email', { name: user.username, accountType: user.role, link: link })
 
