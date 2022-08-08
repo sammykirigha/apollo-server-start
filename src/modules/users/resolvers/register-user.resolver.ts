@@ -19,7 +19,7 @@ export class RegisterUserResolver {
 		input: CreateUserInput
 	): Promise<User> {
 
-		let user = await db.users.findOne({where: {email: input.email}})
+		let user = await db.logged_in_users.findOne({where: {email: input.email}})
 
 		if (user) {
 			throw new UserInputError("User already exists with that email")
@@ -31,7 +31,7 @@ export class RegisterUserResolver {
 		const transaction = await db.sequelize.transaction();
 
 		try {
-			const user = await db.users.create({
+			const user = await db.logged_in_users.create({
 				...input,
 				password: hashedPassword
 			},
@@ -47,26 +47,26 @@ export class RegisterUserResolver {
 					.update(authToken)
 					.digest("hex");
 
-				const link = `https://promis.co.ke/logins/email/confirm/${authToken}`
+				const link = `http://localhost:3001/confirm-email/${authToken}`
 
 				const htmlData = await loadTemplate('registration-email', { name: user.username, accountType: user.role, link: link })
 
 				await sendMail({
 					from: {
-						name: "Samuel Kirigha",
+						name: "Doctirs Medical Hospital",
 						address: "sammydorcis@outlook.com"
 					},
 					to: `${user.email}`,
 					subject: "Confirmation Email",
 					text: "Please check your email to confirm before your registration before you continue. The email is valid for 30 min",
 					html: htmlData
-					// `<p>To complete your change of sign-in method, please confirm your email address
-					// by clicking this link: <a href="${link}">${link}</a></p>`
 				}
 				)
 
 				transaction.commit();
 				user.confirmToken = hashedAuthToken;
+				console.log('this user', user);
+				
 				await user.save()
 
 				const token = sign({

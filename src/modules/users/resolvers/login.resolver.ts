@@ -18,11 +18,13 @@ export class LoginResolver {
 		input: LoginUserInput,
 	): Promise<User | null> {
 
-		let user = await db.users.findOne({ where: { email: input.email } })
+		let user = await db.logged_in_users.findOne({ where: { email: input.email } })
+		console.log('logging in user', user);
+		
 		
 		if (!user) {
 			throw new UserInputError(
-				"Invalid credentials"
+				"Invalid credentials "
 			)
 		}
 
