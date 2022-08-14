@@ -65,7 +65,7 @@ export class RegisterResolver {
 				)
 
 				//update users table role for this patient
-				const thisPatient = await db.users.findOne({ where: { email: patient.email } })
+				const thisPatient = await db.logged_in_users.findOne({ where: { email: patient.email } })
 				
 				if (thisPatient) {
 					thisPatient.role = "patient"
