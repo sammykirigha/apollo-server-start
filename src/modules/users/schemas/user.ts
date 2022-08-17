@@ -10,6 +10,9 @@ export class User {
 	@Field({ description: "username of the user" })
 	username: string;
 
+	@Field({ description: "ID of the user as patient/doctor" })
+	user_id: string;
+
 	@Field({ description: "email of the user" })
 	email: string;
 

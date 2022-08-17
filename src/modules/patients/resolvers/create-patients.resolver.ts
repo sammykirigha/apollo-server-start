@@ -20,6 +20,8 @@ export class RegisterResolver {
 	): Promise<Patient> {
 
 		let patient = await db.patients.findOne({ where: { email: input.email } })
+		console.log('patient', patient);
+		
 		if (patient) {
 			throw new UserInputError(
 				"User with that email already exists//////"
@@ -65,10 +67,11 @@ export class RegisterResolver {
 				)
 
 				//update users table role for this patient
-				const thisPatient = await db.users.findOne({ where: { email: patient.email } })
+				const thisPatient = await db.logged_in_users.findOne({ where: { email: patient.email } })
 				
 				if (thisPatient) {
 					thisPatient.role = "patient"
+					thisPatient.user_id = patient.id
 					thisPatient.save()
 				} else {
 					throw new Error("Unexpected error occured please try again later")
