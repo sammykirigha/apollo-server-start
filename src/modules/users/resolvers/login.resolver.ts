@@ -19,7 +19,7 @@ export class LoginResolver {
 	): Promise<User | null> {
 
 		let user = await db.logged_in_users.findOne({ where: { email: input.email } })
-		console.log('logging in user', user);
+		
 		
 		
 		if (!user) {
@@ -38,6 +38,8 @@ export class LoginResolver {
 			id: user.id,
 			status: user.status,
 		}, 'sammykightgfhgcvbnb', { expiresIn: '24h' })
+
+		console.log('logging in user', user);
 
 		user.token = newToken;
 		return user;
