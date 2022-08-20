@@ -24,7 +24,7 @@ export class RegisterResolver {
 		
 		if (patient) {
 			throw new UserInputError(
-				"User with that email already exists//////"
+				"User with that email already exists"
 			)
 		}
 
@@ -60,7 +60,7 @@ export class RegisterResolver {
 						address: "sammydorcis@outlook.com"
 					},
 					to: `${patient.email}`,
-					subject: "Patient Account Created",
+					subject: "Doctor Account Created",
 					// text: "Please check your email to confirm before you continue. The email is valid for 30 min",
 					html: `<p>You have successfully created an patient account.Please make complete your profile</p>`
 				}

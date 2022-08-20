@@ -51,23 +51,26 @@ export class RegisterResolver {
 
 			if (doctor) {
 
+				// const htmlData = await loadTemplate('register-email', { name: user.firstName, accountType: user.role })
 				await sendMail({
 					from: {
-						name: "Samuel Kirigha",
+						name: "DevSam Medical Care ",
 						address: "sammydorcis@outlook.com"
 					},
 					to: `${doctor.email}`,
-					subject: "Confirmation Email",
-					// text: "Please check your email to create your password. The email is valid for 30 min",
-					html: `<p>You have been addded as a doctor...Complete your profile.</p>`
+					subject: "Patient Account Created",
+					// text: "Please check your email to confirm before you continue. The email is valid for 30 min",
+					html: `<p>You have successfully created an doctor account.Please make complete your profile</p>`
 				}
 				)
 
+
 				//update users table role for this doctor
-				const thisDoctor = await db.users.findOne({ where: { email: doctor.email } })
+				const thisDoctor = await db.logged_in_users.findOne({ where: { email: doctor.email } })
 				
 				if (thisDoctor) {
 					thisDoctor.role = "doctor"
+					thisDoctor.user_id = doctor.id
 					thisDoctor.save()
 				} else {
 					throw new Error("Unexpected error occured please try again later")
