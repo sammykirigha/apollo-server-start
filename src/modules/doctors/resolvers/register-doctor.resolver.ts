@@ -59,7 +59,6 @@ export class RegisterResolver {
 					},
 					to: `${doctor.email}`,
 					subject: "Patient Account Created",
-					// text: "Please check your email to confirm before you continue. The email is valid for 30 min",
 					html: `<p>You have successfully created an doctor account.Please make complete your profile</p>`
 				}
 				)

@@ -5,9 +5,7 @@ import bcryptjs from 'bcryptjs'
 import { sign } from "jsonwebtoken";
 import { LoginUserInput, User } from "../schemas/user";
 
-
 export class LoginResolver {
-
 	@Mutation(returns => User, {
 		description: "login patient mutation"
 	})

@@ -21,7 +21,7 @@ const registerEnumTypes = (enumTypes: any) => {
     });
 }
 
-
+// apollo function server
 async function startApolloServer() {
     dotenv.config()
 
@@ -38,7 +38,7 @@ async function startApolloServer() {
     })
 
 
-
+//    start the server
     const server = new ApolloServer({
         schema,
         csrfPrevention: true,
