@@ -10,7 +10,8 @@ type AppointmentAttributes = {
   doctorId: string,
   date: Date,
   time: string,
-  comments: string,
+  patient_firstname: string;
+  patient_lastname: string;
   description: string,
   status: "pending" | "complete" | "approved" | "rejected",
   fees: string,
@@ -29,7 +30,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     doctorId: string;
     date: Date;
     time: string;
-    comments: string;
+    patient_firstname: string;
+    patient_lastname: string;
     description: string;
     status: "pending" | "complete" | "approved" | "rejected";
     fees: string;
@@ -77,7 +79,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      comments: {
+      patient_firstname: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+       patient_lastname: {
         type: DataTypes.STRING,
         allowNull: false
       },

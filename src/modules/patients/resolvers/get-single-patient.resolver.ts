@@ -9,12 +9,13 @@ export class GetSingleAppointmentById {
 			description: "fetch one patient"
 		})
 		input: HandleSinglePatientInput
-	): Promise<Patient>{
-		
-		let data = await db.patients.findOne({ where: { id: input.id }, include: [{
+	): Promise<Patient> {
+
+		let data = await db.patients.findOne({
+			where: { id: input.id }, include: [{
 				model: db.appointments,
-			}] })
-		
+			}]
+		})
 
 		if (!data) {
 			throw new Error("No patient like that found")

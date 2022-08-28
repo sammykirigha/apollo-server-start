@@ -7,8 +7,11 @@ export class User {
 	@Field({ description: "ID of the user" })
 	id: string;
 
-	@Field({ description: "username of the user" })
+	@Field({nullable: true, description: "username of the user" })
 	username: string;
+
+	@Field({nullable: true, description: "ID of the user as patient/doctor" })
+	user_id: string;
 
 	@Field({ description: "email of the user" })
 	email: string;

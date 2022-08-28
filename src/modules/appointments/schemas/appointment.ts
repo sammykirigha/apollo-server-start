@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
+import { IsDate, IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
 import { AppointmentStatus } from "../../../common/enums/appointment.enum";
 
@@ -29,8 +29,11 @@ export class Appointment {
 	@Field({ description: "time of the appointment" })
 	time: string;
 
-	@Field({ description: "comments" })
-	comments: string;
+	@Field({ description: " patient_firstname" })
+	 patient_firstname: string;
+
+	@Field({ description: " patient_firstname" })
+	 patient_lastname: string;
 
 	@Field({ description: "charge for the appointment" })
 	fees: string;
@@ -98,7 +101,15 @@ export class CreateAppointmentInput {
 			description: "time of a user"
 		}
 	)
-	comments: string;
+	patient_firstname: string;
+
+	@Field(
+		{
+			nullable: true,
+			description: "time of a user"
+		}
+	)
+	patient_lastname: string;
 
 	@Field({
 		nullable: true,

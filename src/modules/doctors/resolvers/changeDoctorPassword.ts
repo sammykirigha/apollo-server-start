@@ -22,7 +22,7 @@ export class ChangeDoctorsPasswordResolver {
 			throw new UserInputError("No doctor found!")
 		}
 
-		let thisUser = await db.users.findOne({ where: { email: doctor.email } })
+		let thisUser = await db.logged_in_users.findOne({ where: { email: doctor.email } })
 		if (!thisUser) {
 			throw new UserInputError("No user found!")
 		}

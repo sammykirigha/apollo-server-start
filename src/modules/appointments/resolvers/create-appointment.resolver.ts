@@ -44,7 +44,9 @@ export class CreateAppointmentResolver {
 				// 		name: "Samuel Kirigha",
 				// 		address: "sammydorcis@outlook.com"
 				// 	},
+				// 
 				// 	to: `${appointment.patient_email}`,
+				// cc: `${appointment.doctor_email}`
 				// 	subject: "Appointment Created",
 				// 	// text: "You have created an appointment the doctors is approving your appointment",
 				// 	html: `
@@ -55,29 +57,7 @@ export class CreateAppointmentResolver {
 				// }
 				// )
 
-				let patient = await db.patients.findOne({ where: { id: input.patientId } })
-
-				if (!patient) {
-					throw new Error("Not found the patient")
-				}
-
-				// await sendMail({
-				// 	from: {
-				// 		name: "Samuel Kirigha",
-				// 		address: "sammydorcis@outlook.com"
-				// 	},
-				// 	to: `${doctor.email}`,
-				// 	subject: "New Appointment",
-				// 	text: "Please check your new appointment to approve it.",
-				// 	html: `
-				// 	<p>
-				// 		You have a new appointment from 
-				// 		${patient.firstname} ${patient.lastname} on ${appointment.date} at ${appointment.time}. 
-				// 		Please check your schedule to approve or disapprove the appointment
-				// 	</p>
-				// 	`
-				// }
-				// )
+				
 
 				transaction.commit()
 

@@ -24,12 +24,7 @@ export class ConfirmEmailResolver {
 			.update(token)
 			.digest("hex");
 		
-		let user = await db.logged_in_users.findOne({
-			where:
-			{
-				confirmToken: hashedAuthToken
-			}
-		})
+		let user = await db.logged_in_users.findOne({where:{confirmToken: hashedAuthToken}})
 
 		if (!user) {
 			throw new UserInputError(
