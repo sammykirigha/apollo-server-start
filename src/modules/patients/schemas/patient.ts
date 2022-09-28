@@ -168,19 +168,19 @@ export class UpdatePatientInput {
 	id: string
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "Username of a user"
 	})
 	firstname?: string
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "Username of a user"
 	})
 	lastname?: string;
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "email of a user"
 	})
 	@IsEmail()
@@ -215,6 +215,18 @@ export class UpdatePatientInput {
 		description: "change marital status"
 	})
 	maritalStatus?: string
+
+	@Field({
+		nullable: true,
+		description: "change nationality status"
+	})
+	nationality?: string
+
+	@Field({
+		nullable: true,
+		description: "change county status"
+	})
+	county?: string
 }
 
 
