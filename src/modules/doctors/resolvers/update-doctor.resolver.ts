@@ -4,11 +4,11 @@ import { UpdateDoctorInput } from "../schemas/doctors";
 
 export class UpdateDoctorResolver {
 	@Mutation(returns => String, {
-		description: "updating an patient"
+		description: "updating an doctor"
 	})
 	async updateDoctor(
     @Arg('input', type => UpdateDoctorInput, {
-			description: "update patient input"
+			description: "update doctor input"
 		})
 		input: UpdateDoctorInput
 	): Promise<string>{

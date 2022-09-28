@@ -246,12 +246,12 @@ export class UpdateDoctorInput {
 	})
 	department: string;
 
-	@Field({
-		nullable: true,
-		description: "password of the user"
-	})
-	@MinLength(8)
-	password: string;
+	// @Field({
+	// 	nullable: true,
+	// 	description: "password of the user"
+	// })
+	// @MinLength(8)
+	// password: string;
 
 	@Field({
 		nullable: true,
