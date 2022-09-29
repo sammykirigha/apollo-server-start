@@ -89,7 +89,15 @@ export class ChatsResolver {
 		@Arg('chatId', type => String)
 		chatId: string
 	): Promise<Message[]> {
-		const messages = await db.messages.findAll()
+		const messages = await db.messages.findAll({
+			where: {
+				chatId: chatId
+			},
+			include: [
+				{ model: db.logged_in_users, as: "receiver_" },
+				{ model: db.logged_in_users, as: "sender_" },
+			]
+		})
 		return messages
 	}
 
@@ -107,11 +115,15 @@ export class ChatsResolver {
 				}
 			},
 			include: [
-				{ model: db.messages, as: "last", limit: 1 },
+				{
+					model: db.messages, as: "last", limit: 1, include: [
+						{ model: db.logged_in_users, as: "receiver_" },
+						{ model: db.logged_in_users, as: "sender_" },
+					]
+				},
 			]
 		})
-		console.log(chats);
-		
+
 		return chats
 	}
 }
