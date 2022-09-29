@@ -6,7 +6,7 @@ export class UpdatePatientResolver {
 	@Mutation(returns => String, {
 		description: "updating an patient"
 	})
-	async updatePatient(
+	async updatePatientInfo(
     @Arg('input', type => UpdatePatientInput, {
 			description: "update patient input"
 		})

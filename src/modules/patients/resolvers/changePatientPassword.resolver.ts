@@ -2,26 +2,26 @@ import { UserInputError } from "apollo-server-express";
 import { Arg, Mutation, Resolver } from "type-graphql";
 import db from "../../../../models";
 import bcryptjs from 'bcryptjs'
-import { ChangePasswordInput } from "../schemas/doctors";
+import { ChangePatientPasswordInput } from "../schemas/patient";
 
 @Resolver()
-export class ChangeDoctorsPasswordResolver {
+export class ChangePatientPasswordResolver {
 	@Mutation(returns => String, {
 		description: "change users password"
 	})
-	async changeDoctorsPassword(
-		@Arg('input', type => ChangePasswordInput, {
+	async changePatientPassword(
+		@Arg('input', type => ChangePatientPasswordInput, {
 			description: "change password Patients Input"
 		})
-		input: ChangePasswordInput
+		input: ChangePatientPasswordInput
 	): Promise<string> {
 
-		let doctor = await db.doctors.findOne({ where: { id: input.id } })	
-		if (!doctor) {
+		let patient = await db.patients.findOne({ where: { id: input.id } })	
+		if (!patient) {
 			throw new UserInputError("No doctor found!")
 		}
 
-		let thisUser = await db.logged_in_users.findOne({ where: { email: doctor.email } })
+		let thisUser = await db.logged_in_users.findOne({ where: { email: patient.email } })
 		if (!thisUser) {
 			throw new UserInputError("No user found!")
 		}

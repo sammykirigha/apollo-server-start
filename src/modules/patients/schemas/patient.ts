@@ -168,62 +168,88 @@ export class UpdatePatientInput {
 	id: string
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "Username of a user"
 	})
-	firstname: string
+	firstname?: string
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "Username of a user"
 	})
-	lastname: string;
+	lastname?: string;
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "email of a user"
 	})
 	@IsEmail()
-	email: string;
+	email?: string;
 
 	@Field({
 		nullable: true,
 		description: "phone of a user"
 	})
-	phone: string;
-
-	@Field({
-		nullable: true,
-		description: "gender of a user"
-	})
-	gender: string;
+	phone?: string;
 
 	@Field({
 		nullable: true,
 		description: "address of a user"
 	})
-	address: string;
-
-	@Field({
-		nullable: true,
-		description: "password of the user"
-	})
-	@MinLength(8)
-	password: string;
+	address?: string;
 
 	@Field({
 		nullable: true,
 		description: "image of the user"
 	})
-	image: string;
+	image?: string;
 
 	@Field({
 		nullable: true,
-		description: "image of the user"
+		description: "description of the user"
 	})
-	description: string;
+	description?: string;
+
+	@Field({
+		nullable: true,
+		description: "change marital status"
+	})
+	maritalStatus?: string
+
+	@Field({
+		nullable: true,
+		description: "change nationality status"
+	})
+	nationality?: string
+
+	@Field({
+		nullable: true,
+		description: "change county status"
+	})
+	county?: string
 }
 
+
+@InputType()
+export class ChangePatientPasswordInput {
+	@Field({
+		nullable: true,
+		description: "Username of a user"
+	})
+	id: string
+
+	@Field({
+		nullable: true,
+		description: "password of a user"
+	})
+	password: string
+
+	@Field({
+		nullable: true,
+		description: "newPassword of a user"
+	})
+	newPassword: string
+}
 
 @InputType()
 export class HandleSinglePatientInput {

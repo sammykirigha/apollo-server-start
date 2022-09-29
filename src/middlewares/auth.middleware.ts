@@ -4,6 +4,9 @@ import { Context } from "../common/interfaces/context.interface";
 export const authChecker: AuthChecker<Context> = ({ context: { user } }, roles) => {
 	if (roles.length === 0) return user !== null;
 
+	console.log({user});
+	
+
 	if (!user) {
 		return false;
 	}
