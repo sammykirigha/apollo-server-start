@@ -55,17 +55,12 @@ export class ChatsResolver {
 
 				if (chat) {
 					await transaction.commit();
-
 					message.chatId = chat.id;
 					await message.save();
-
 					chat.last_message_id = message.id;
 					await chat.save();
-
 					await pubSub.publish('NOTIFICATIONS', { message })
-
 					return message;
-
 				} else {
 					await transaction.rollback();
 					throw new Error(`Could send message`);
@@ -79,7 +74,6 @@ export class ChatsResolver {
 			console.log(error.message);
 			await transaction.rollback();
 			throw new Error("Could send message");
-
 		}
 	}
 
