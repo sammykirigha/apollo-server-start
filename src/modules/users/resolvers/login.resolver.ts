@@ -17,9 +17,9 @@ export class LoginResolver {
 	): Promise<User | null> {
 
 		let user = await db.logged_in_users.findOne({ where: { email: input.email } })
-		
-		
-		
+
+
+
 		if (!user) {
 			throw new UserInputError(
 				"Invalid credentials "
@@ -32,12 +32,13 @@ export class LoginResolver {
 			throw new UserInputError(
 				"Invalid credentials"
 			)
-		} const newToken = sign({
+		}
+
+		const newToken = sign({
 			id: user.id,
 			status: user.status,
 		}, 'sammykightgfhgcvbnb', { expiresIn: '24h' })
 
-		console.log('logging in user', user);
 
 		user.token = newToken;
 		return user;

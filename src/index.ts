@@ -6,11 +6,13 @@ import * as dotenv from 'dotenv';
 import http from 'http';
 import { buildSchema, registerEnumType } from "type-graphql";
 import { authChecker } from "./middlewares/auth.middleware";
-
+import { useServer } from 'graphql-ws/lib/use/ws';
+import { WebSocketServer } from 'ws'; // yarn add ws
 import { verify } from "jsonwebtoken"
 import { Context } from "./common/interfaces/context.interface";
 import { AppointmentStatus } from "./common/enums/appointment.enum";
 import { userRoleStatus } from "./common/enums/userRoles.enum";
+import pubsub from "./pubSub";
 
 const registerEnumTypes = (enumTypes: any) => {
     enumTypes.forEach((enumType: any) => {
@@ -20,6 +22,11 @@ const registerEnumTypes = (enumTypes: any) => {
         })
     });
 }
+
+const wsServer = new WebSocketServer({
+  port: 5050,
+  path: '/subscriptions',
+});
 
 // apollo function server
 async function startApolloServer() {
@@ -34,7 +41,9 @@ async function startApolloServer() {
         resolvers: [
             __dirname + "/modules/**/*.ts"
         ],
-        authChecker
+        authChecker,
+        pubSub: pubsub
+        
     })
 
 
@@ -42,29 +51,29 @@ async function startApolloServer() {
     const server = new ApolloServer({
         schema,
         csrfPrevention: true,
-        cache: "bounded",
+        // cache: "bounded",
         context: ({ req, res }) => {
             const auth = req.headers.authorization;
             let user = undefined;
-
             if (auth) {
                 const token = auth.split(" ")[1]
 
-                const secretKey = process.env.SECRET_KEY  || ""
+                const secretKey = process.env.SECRET_KEY
 
                 try {
 
-                    user = verify(token, "sammykightgfhgcvbnb" || '');
+                    user = verify(token, secretKey || '');
                 } catch (error) { }
             }
 
             const ctx: Context = {
                 req, res, user
-            }
+            }            
 
             return ctx
         }
     });
+     useServer({ schema }, wsServer);
 
     const app = express();
     const httpServer = http.createServer(app);
