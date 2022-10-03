@@ -7,6 +7,7 @@ type AppointmentAttributes = {
   patient_email: string,
   patient_phone: string,
   department: string,
+  age: number,
   doctorId: string,
   date: Date,
   time: string,
@@ -28,6 +29,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     patient_phone: string;
     department: string;
     doctorId: string;
+    age: number;
     date: Date;
     time: string;
     patient_firstname: string;
@@ -56,6 +58,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       patient_email: {
         type: DataTypes.STRING,
+        allowNull: false
+      },
+      age: {
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       patient_phone: {

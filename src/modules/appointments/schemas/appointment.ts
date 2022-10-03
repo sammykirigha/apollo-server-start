@@ -17,6 +17,9 @@ export class Appointment {
 	@Field({ description: "phone of the patient" })
 	patient_phone: string;
 
+	@Field({ description: "age of the patient" })
+	age: number;
+
 	@Field({ description: "department" })
 	department: string;
 
@@ -30,10 +33,10 @@ export class Appointment {
 	time: string;
 
 	@Field({ description: " patient_firstname" })
-	 patient_firstname: string;
+	patient_firstname: string;
 
 	@Field({ description: " patient_firstname" })
-	 patient_lastname: string;
+	patient_lastname: string;
 
 	@Field({ description: "charge for the appointment" })
 	fees: string;
@@ -68,6 +71,12 @@ export class CreateAppointmentInput {
 		description: "phone of a user"
 	})
 	patient_phone: string;
+
+	@Field({
+		nullable: false,
+		description: "phone of a user"
+	})
+	age: number;
 
 	@Field({
 		nullable: false,
@@ -165,6 +174,12 @@ export class UpdateAppointmentInput {
 		description: "address of a user"
 	})
 	fees: string;
+
+	@Field({
+		nullable: false,
+		description: "age of a user"
+	})
+	age: number;
 
 	@Field({
 		nullable: false,
