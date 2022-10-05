@@ -46,6 +46,12 @@ export class Appointment {
 
 	@Field({ description: "status of the appointment" })
 	description: string;
+
+	@Field({ description: "appointment_type of the appointment" })
+	appointment_type: string;
+
+	@Field({ description: "other_type of the appointment" })
+	other_type: string;
 }
 
 @InputType()
@@ -73,7 +79,7 @@ export class CreateAppointmentInput {
 	patient_phone: string;
 
 	@Field({
-		nullable: false,
+		nullable: true,
 		description: "phone of a user"
 	})
 	age: number;
@@ -89,6 +95,8 @@ export class CreateAppointmentInput {
 		description: "department of a user"
 	})
 	department: string;
+
+
 
 	@Field({
 		nullable: true,
@@ -137,6 +145,18 @@ export class CreateAppointmentInput {
 		description: "password treating the user"
 	})
 	doctorId: string;
+
+	@Field({
+		nullable: false,
+		description: "department of a user"
+	})
+	appointment_type: string;
+
+	@Field({
+		nullable: false,
+		description: "department of a user"
+	})
+	other_type: string;
 }
 
 @InputType()

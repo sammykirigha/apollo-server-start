@@ -11,7 +11,7 @@ export class CreateDepartmentResolver {
 	async createDepartment(
 		@Ctx()
 		@Arg('input', type => CreateDepartmentInput, {
-			description: "CreateDEpartmentInpute doctors Input"
+			description: "CreateDEpartmentInput doctors Input"
 		})
 		input: CreateDepartmentInput
 	): Promise<Department> {
@@ -24,7 +24,9 @@ export class CreateDepartmentResolver {
 		const transaction = await db.sequelize.transaction();
 
 		try {
-			let department = await db.Departments.create(input, {
+			let department = await db.Departments.create({
+				department_name: input.department_name
+			}, {
 				transaction
 			})
 

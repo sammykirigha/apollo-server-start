@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 
 @ObjectType()
@@ -11,6 +11,7 @@ export class Department {
   department_name: string;
 }
 
+@InputType()
 export class CreateDepartmentInput {
 
 	@Field({
