@@ -23,6 +23,7 @@ const registerEnumTypes = (enumTypes: any) => {
     });
 }
 
+// Creating the WebSocket server
 const wsServer = new WebSocketServer({
   port: 5050,
   path: '/subscriptions',
@@ -43,7 +44,6 @@ async function startApolloServer() {
         ],
         authChecker,
         pubSub: pubsub
-        
     })
 
 
@@ -51,7 +51,7 @@ async function startApolloServer() {
     const server = new ApolloServer({
         schema,
         csrfPrevention: true,
-        // cache: "bounded",
+        cache: "bounded",
         context: ({ req, res }) => {
             const auth = req.headers.authorization;
             let user = undefined;
@@ -73,7 +73,9 @@ async function startApolloServer() {
             return ctx
         }
     });
-     useServer({ schema }, wsServer);
+
+    // WebSocketServer start listening.
+    useServer({ schema }, wsServer);
 
     const app = express();
     const httpServer = http.createServer(app);

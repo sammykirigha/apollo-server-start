@@ -18,7 +18,6 @@ export class ConfirmEmailResolver {
 		{ token }: ConfirmEmailInput
 	): Promise<string> {
 
-
 		const hashedAuthToken = crypto
 			.createHash("sha256")
 			.update(token)
@@ -34,9 +33,7 @@ export class ConfirmEmailResolver {
 
 		user.confirmed = true;
 		user.confirmToken = null;
-
 		await user.save()
-
 
 		return "You can continue to log in with your credentials...."
 

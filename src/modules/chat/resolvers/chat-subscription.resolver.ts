@@ -8,13 +8,11 @@ class NotificationPayload {
 	message: Message
 }
 
-
 @ObjectType()
 class Notification {
 	@Field()
 	message: Message
 }
-
 
 @Resolver()
 export class ChatSubscriptionResolvers {

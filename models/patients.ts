@@ -8,6 +8,7 @@ type PatientAttributes = {
     email: string,
     phone: string,
     gender: string,
+    age: number,
     address: string,
     image: string;
     dateOfBirth: Date;
@@ -29,6 +30,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         phone: string;
         gender: string;
         address: string;
+        age: number;
         image: string;
         dateOfBirth: Date;
         disability: boolean;
@@ -70,6 +72,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
             },
             gender: {
                 type: DataTypes.STRING,
+                allowNull: false
+            },
+            age: {
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             address: {

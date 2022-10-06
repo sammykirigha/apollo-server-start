@@ -7,12 +7,15 @@ type AppointmentAttributes = {
   patient_email: string,
   patient_phone: string,
   department: string,
+  age: number,
   doctorId: string,
   date: Date,
   time: string,
   patient_firstname: string;
   patient_lastname: string;
-  description: string,
+  description: string;
+  appointment_type: string,
+  other_type: string;
   status: "pending" | "complete" | "approved" | "rejected",
   fees: string,
 
@@ -28,11 +31,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
     patient_phone: string;
     department: string;
     doctorId: string;
+    age: number;
     date: Date;
     time: string;
     patient_firstname: string;
     patient_lastname: string;
     description: string;
+    appointment_type: string;
+    other_type: string;
     status: "pending" | "complete" | "approved" | "rejected";
     fees: string;
 
@@ -52,11 +58,15 @@ module.exports = (sequelize: any, DataTypes: any) => {
       patientId: {
         type: Sequelize.UUID,
         allowNull: false,
-        references: {model: 'patients', key: 'id'},
+        references: { model: 'patients', key: 'id' },
       },
       patient_email: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      age: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       },
       patient_phone: {
         type: DataTypes.STRING,
@@ -66,9 +76,17 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false
       },
+      appointment_type: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      other_type: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       doctorId: {
         type: Sequelize.UUID,
-        references: {model: 'doctors', key: 'id'},
+        references: { model: 'doctors', key: 'id' },
         allowNull: false
       },
       date: {
@@ -83,11 +101,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-       patient_lastname: {
+      patient_lastname: {
         type: DataTypes.STRING,
         allowNull: false
       },
-        description: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -97,7 +115,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false
       },
       fees: {
-        type:  DataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
     },

@@ -25,6 +25,9 @@ export class Patient {
 	@Field({ description: "gender of the patient" })
 	gender: string;
 
+	@Field({ description: "age of the patient" })
+	age: number;
+
 	@Field({ description: "address of the patient" })
 	address: string;
 
@@ -52,7 +55,7 @@ export class Patient {
 	@Field({ nullable: true, description: "doctor treating the patient" })
 	maritalStatus: string;
 
-	@Field((_returns) => [Appointment],{
+	@Field((_returns) => [Appointment], {
 		nullable: true,
 		description: "appointments of the patients"
 	})
@@ -90,6 +93,12 @@ export class CreatePatientInput {
 		description: "phone of a user"
 	})
 	phone: string;
+
+	@Field({
+		nullable: true,
+		description: "age of a user"
+	})
+	age: number;
 
 	@Field({
 		nullable: true,
@@ -144,7 +153,7 @@ export class CreatePatientInput {
 		description: "image of the user"
 	})
 	maritalStatus: string;
-	
+
 }
 
 

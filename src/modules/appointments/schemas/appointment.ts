@@ -1,6 +1,8 @@
 import { IsDate, IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
 import { AppointmentStatus } from "../../../common/enums/appointment.enum";
+import { Doctor } from "../../doctors/schemas/doctors";
+import { Patient } from "../../patients/schemas/patient";
 
 
 @ObjectType()
@@ -17,6 +19,9 @@ export class Appointment {
 	@Field({ description: "phone of the patient" })
 	patient_phone: string;
 
+	@Field({ description: "age of the patient", nullable: true })
+	age: number;
+
 	@Field({ description: "department" })
 	department: string;
 
@@ -30,10 +35,10 @@ export class Appointment {
 	time: string;
 
 	@Field({ description: " patient_firstname" })
-	 patient_firstname: string;
+	patient_firstname: string;
 
 	@Field({ description: " patient_firstname" })
-	 patient_lastname: string;
+	patient_lastname: string;
 
 	@Field({ description: "charge for the appointment" })
 	fees: string;
@@ -43,6 +48,18 @@ export class Appointment {
 
 	@Field({ description: "status of the appointment" })
 	description: string;
+
+	@Field({ description: "appointment_type of the appointment", nullable: true })
+	appointment_type: string;
+
+	@Field({ description: "other_type of the appointment", nullable: true })
+	other_type: string;
+
+	@Field(type => Doctor, { description: "appointment doctor", nullable: true })
+	doctor: Doctor;
+
+	@Field(type => Patient, { description: "appointment patient", nullable: true })
+	patient: Patient;
 }
 
 @InputType()
@@ -70,6 +87,12 @@ export class CreateAppointmentInput {
 	patient_phone: string;
 
 	@Field({
+		nullable: true,
+		description: "phone of a user"
+	})
+	age: number;
+
+	@Field({
 		nullable: false,
 		description: "address of a user"
 	})
@@ -80,6 +103,8 @@ export class CreateAppointmentInput {
 		description: "department of a user"
 	})
 	department: string;
+
+
 
 	@Field({
 		nullable: true,
@@ -128,6 +153,18 @@ export class CreateAppointmentInput {
 		description: "password treating the user"
 	})
 	doctorId: string;
+
+	@Field({
+		nullable: false,
+		description: "department of a user"
+	})
+	appointment_type: string;
+
+	@Field({
+		nullable: false,
+		description: "department of a user"
+	})
+	other_type: string;
 }
 
 @InputType()
@@ -165,6 +202,12 @@ export class UpdateAppointmentInput {
 		description: "address of a user"
 	})
 	fees: string;
+
+	@Field({
+		nullable: false,
+		description: "age of a user"
+	})
+	age: number;
 
 	@Field({
 		nullable: false,
@@ -209,4 +252,14 @@ export class HandleSingleAppointmentInput {
 		description: "phone of a user"
 	})
 	id: string;
+}
+
+@InputType()
+export class GetAppointmentByDateInput {
+
+	@Field({
+		nullable: false,
+		description: "patient id of a user"
+	})
+	patientID: string;
 }
