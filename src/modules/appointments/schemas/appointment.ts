@@ -1,6 +1,8 @@
 import { IsDate, IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
 import { AppointmentStatus } from "../../../common/enums/appointment.enum";
+import { Doctor } from "../../doctors/schemas/doctors";
+import { Patient } from "../../patients/schemas/patient";
 
 
 @ObjectType()
@@ -17,7 +19,7 @@ export class Appointment {
 	@Field({ description: "phone of the patient" })
 	patient_phone: string;
 
-	@Field({ description: "age of the patient" })
+	@Field({ description: "age of the patient", nullable: true })
 	age: number;
 
 	@Field({ description: "department" })
@@ -47,11 +49,17 @@ export class Appointment {
 	@Field({ description: "status of the appointment" })
 	description: string;
 
-	@Field({ description: "appointment_type of the appointment" })
+	@Field({ description: "appointment_type of the appointment", nullable: true })
 	appointment_type: string;
 
-	@Field({ description: "other_type of the appointment" })
+	@Field({ description: "other_type of the appointment", nullable: true })
 	other_type: string;
+
+	@Field(type => Doctor, { description: "appointment doctor", nullable: true })
+	doctor: Doctor;
+
+	@Field(type => Patient, { description: "appointment patient", nullable: true })
+	patient: Patient;
 }
 
 @InputType()
@@ -244,4 +252,14 @@ export class HandleSingleAppointmentInput {
 		description: "phone of a user"
 	})
 	id: string;
+}
+
+@InputType()
+export class GetAppointmentByDateInput {
+
+	@Field({
+		nullable: false,
+		description: "patient id of a user"
+	})
+	patientID: string;
 }
