@@ -13,6 +13,8 @@ import { Context } from "./common/interfaces/context.interface";
 import { AppointmentStatus } from "./common/enums/appointment.enum";
 import { userRoleStatus } from "./common/enums/userRoles.enum";
 import pubsub from "./pubSub";
+import { SortDirection } from "./common/schema/paganation.schema";
+import { AppointmentSortColumn } from "./modules/appointments/schemas/enums";
 
 const registerEnumTypes = (enumTypes: any) => {
     enumTypes.forEach((enumType: any) => {
@@ -35,7 +37,10 @@ async function startApolloServer() {
 
     registerEnumTypes([
         [AppointmentStatus, "AppointmentStatus", "The Status of a appointment"],
-        [userRoleStatus, "usersStatus", "The users roles status - user, admin, patient, doctor"]
+        [userRoleStatus, "usersStatus", "The users roles status - user, admin, patient, doctor"],
+        [SortDirection, "sort direction", "sort direction for sorting"],
+        [AppointmentSortColumn, "AppointmentSortColumn", "appointment sort column"]
+
     ])
 
     const schema = await buildSchema({
