@@ -1,7 +1,9 @@
 import { Op } from "sequelize";
-import { Arg, Query  } from "type-graphql";
+import { Arg, Query } from "type-graphql";
 import db from "../../../../models";
+import { buildDbFilter } from "../../../common/filters/BuilderFilter";
 import { Appointment, GetAppointmentByDateInput } from "../schemas/appointment";
+import { AppointmentFilter } from "../schemas/filters";
 export class PatientResolver {
 
 	@Query(returns => ([Appointment]))
@@ -18,19 +20,25 @@ export class PatientResolver {
 
 	@Query(returns => ([Appointment]))
 	async getAppointmentsByDate(
-		@Arg('input', type => GetAppointmentByDateInput, {
-			description: "fetch one appointment"
+		@Arg('filters', type => AppointmentFilter, {
+			description: "fetch one appointment",
+			nullable: true
 		})
-		input: GetAppointmentByDateInput
-	): Promise<([Appointment])>{
+		filters: AppointmentFilter,
+	): Promise<([Appointment])> {
+
+		let where = {}
+
+		if (filters) {
+			where = buildDbFilter(filters)
+		}
+		
 		let appointments = await db.appointments.findAll({
-			where: {
-				patientId: input.patientID,
-				date: {
-					[Op.gt]: new Date(),
-					[Op.lt]:  new Date(new Date().getTime() + (86400000 *5 )  )
-			  }
-			}
+			where,
+			include: [
+				db.patients,
+				db.doctors
+			]
 		})
 
 		return appointments;
