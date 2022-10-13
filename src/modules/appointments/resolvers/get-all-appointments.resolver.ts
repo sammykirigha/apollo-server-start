@@ -12,53 +12,53 @@ export class AppointmentsResolver {
 
 	@Query(returns => ([Appointment]))
 	async getAppointments(
-		// @Arg('pagination', (type) => AppointmentPaginationInput, {
-		// 	description: 'appointment pagination',
-		// 	nullable: true
-		// })
-		// pagination: AppointmentPaginationInput
+		@Arg('pagination', (type) => AppointmentPaginationInput, {
+			description: 'appointment pagination',
+			nullable: true
+		})
+		pagination: AppointmentPaginationInput
 	): Promise<([Appointment])> {
-		// let page: number = pagination?.page || -1;
-		// page = page >= 1 ? page - 1 : page;
+		let page: number = pagination?.page || -1;
+		page = page >= 1 ? page - 1 : page;
 
-		// let column: AppointmentSortColumn = pagination?.column || AppointmentSortColumn.ID;
-		// let pageSize: number = pagination?.count || -1;
+		let column: AppointmentSortColumn = pagination?.column || AppointmentSortColumn.ID;
+		let pageSize: number = pagination?.count || -1;
 
-		// //get sort column
-		// let sortColumn: string = 'id';
-		// switch (column) {
-		// 	case AppointmentSortColumn.ID:
-		// 		sortColumn = 'id';
-		// 		break;
+		//get sort column
+		let sortColumn: string = 'id';
+		switch (column) {
+			case AppointmentSortColumn.ID:
+				sortColumn = 'id';
+				break;
 			
-		// }
+		}
 
-		// //filtering and sorting options
-		// const limit = pageSize <= 0 ? null : pageSize;
-		// const offset = page <= 0 ? 0 : page * (pageSize <= 0 ? 0 : pageSize);
-		// const order = [
-		// 	[sortColumn, pagination?.sortDirection || SortDirection.ASC],
-		// ];
+		//filtering and sorting options
+		const limit = pageSize <= 0 ? null : pageSize;
+		const offset = page <= 0 ? 0 : page * (pageSize <= 0 ? 0 : pageSize);
+		const order = [
+			[sortColumn, pagination?.sortDirection || SortDirection.ASC],
+		];
 		let appointments = await db.appointments.findAll({
 			include: [
 				db.patients,
 				db.doctors
 			],
-			// limit,
-			// order,
-			// offset,
-			// subQuery: false
+			limit,
+			order,
+			offset,
+			subQuery: false
 			
 		})
 
-		// const totalCount: number = (await db.appointments.findAll()).length;
+		const totalCount: number = (await db.appointments.findAll()).length;
 
-		// const result: AppointmentPaginationOutput = {
-		// 	count: appointments.length,
-		// 	nodes: appointments,
-		// 	pageCount: totalCount === 0 || pageSize <= 0 ? 1 : Math.ceil(totalCount / pageSize),
-		// 	totalCount,
-		// };
+		const result: AppointmentPaginationOutput = {
+			count: appointments.length,
+			nodes: appointments,
+			pageCount: totalCount === 0 || pageSize <= 0 ? 1 : Math.ceil(totalCount / pageSize),
+			totalCount,
+		};
 
 		return appointments;
 	}

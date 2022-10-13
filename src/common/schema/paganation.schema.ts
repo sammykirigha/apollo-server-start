@@ -8,7 +8,7 @@ export class PaginationResult {
             'The total number of results regardless of pagination and filters provided',
     })
     totalCount: number;
-
+  
     @Field({
         description:
             'The number of results included in this query (after pagination and filtering)',

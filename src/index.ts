@@ -20,7 +20,7 @@ const registerEnumTypes = (enumTypes: any) => {
     enumTypes.forEach((enumType: any) => {
         registerEnumType(enumType[0], {
             name: enumType[1],
-            description: enumTypes[2]
+            description: enumType[2]
         })
     });
 }
@@ -36,11 +36,10 @@ async function startApolloServer() {
     dotenv.config()
 
     registerEnumTypes([
-        [AppointmentStatus, "AppointmentStatus", "The Status of a appointment"],
         [userRoleStatus, "usersStatus", "The users roles status - user, admin, patient, doctor"],
-        [SortDirection, "sort direction", "sort direction for sorting"],
-        [AppointmentSortColumn, "AppointmentSortColumn", "appointment sort column"]
-
+        [SortDirection, "SortDirection", "sort direction for sorting"],
+        [AppointmentSortColumn, "AppointmentSortColumn", "appointment sort column"],
+        [AppointmentStatus, "AppointmentStatus", "The Status of a appointment"],
     ])
 
     const schema = await buildSchema({
@@ -64,7 +63,6 @@ async function startApolloServer() {
                 const token = auth.split(" ")[1]
 
                 const secretKey = process.env.SECRET_KEY
-
                 try {
 
                     user = verify(token, secretKey || '');
